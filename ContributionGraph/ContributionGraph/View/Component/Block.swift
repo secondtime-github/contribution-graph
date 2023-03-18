@@ -21,7 +21,7 @@ struct Block: View {
     func color(for value: Int) -> Color {
         switch value {
         case 0:
-            return .gray
+            return .gray.opacity(0.5)
         case 1:
             return .green.opacity(0.2)
         case 2:
@@ -33,7 +33,7 @@ struct Block: View {
         case 5:
             return .green
         default:
-            return .red
+            return .white
         }
     }
 }

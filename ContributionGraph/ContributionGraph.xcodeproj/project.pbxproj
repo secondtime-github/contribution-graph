@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BF164EC429B632DF0062C04E /* RoutineListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF164EC329B632DF0062C04E /* RoutineListView.swift */; };
+		BF164EC629B635600062C04E /* RoutineListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF164EC529B635600062C04E /* RoutineListViewModel.swift */; };
+		BF164EC929B8C50B0062C04E /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF164EC829B8C50B0062C04E /* CalendarView.swift */; };
+		BFABB7AF29C5DD18003F3227 /* CreateNewItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFABB7AE29C5DD18003F3227 /* CreateNewItemView.swift */; };
 		BFD5A1A229B1D93200FEA346 /* ContributionGraphApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD5A1A129B1D93200FEA346 /* ContributionGraphApp.swift */; };
 		BFD5A1A429B1D93200FEA346 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD5A1A329B1D93200FEA346 /* ContentView.swift */; };
 		BFD5A1A629B1D93300FEA346 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BFD5A1A529B1D93300FEA346 /* Assets.xcassets */; };
@@ -18,9 +22,15 @@
 		BFD5A1BB29B2465100FEA346 /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD5A1BA29B2465100FEA346 /* Block.swift */; };
 		BFD5A1BD29B24F6500FEA346 /* OneDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD5A1BC29B24F6500FEA346 /* OneDay.swift */; };
 		BFD5A1BF29B5808600FEA346 /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD5A1BE29B5808600FEA346 /* TodayView.swift */; };
+		BFD5A1E129B5AC3900FEA346 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD5A1E029B5AC3800FEA346 /* Persistence.swift */; };
+		BFD5A1E529B5ACCB00FEA346 /* ContributionGraph.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BFD5A1E329B5ACCB00FEA346 /* ContributionGraph.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		BF164EC329B632DF0062C04E /* RoutineListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineListView.swift; sourceTree = "<group>"; };
+		BF164EC529B635600062C04E /* RoutineListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineListViewModel.swift; sourceTree = "<group>"; };
+		BF164EC829B8C50B0062C04E /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		BFABB7AE29C5DD18003F3227 /* CreateNewItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewItemView.swift; sourceTree = "<group>"; };
 		BFD5A19E29B1D93200FEA346 /* ContributionGraph.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ContributionGraph.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFD5A1A129B1D93200FEA346 /* ContributionGraphApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributionGraphApp.swift; sourceTree = "<group>"; };
 		BFD5A1A329B1D93200FEA346 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -33,6 +43,8 @@
 		BFD5A1BA29B2465100FEA346 /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
 		BFD5A1BC29B24F6500FEA346 /* OneDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneDay.swift; sourceTree = "<group>"; };
 		BFD5A1BE29B5808600FEA346 /* TodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayView.swift; sourceTree = "<group>"; };
+		BFD5A1E029B5AC3800FEA346 /* Persistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
+		BFD5A1E429B5ACCB00FEA346 /* ContributionGraph.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ContributionGraph.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +58,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BF164EC729B635670062C04E /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				BF164EC529B635600062C04E /* RoutineListViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		BFD5A19529B1D93200FEA346 = {
 			isa = PBXGroup;
 			children = (
@@ -66,7 +86,9 @@
 			isa = PBXGroup;
 			children = (
 				BFD5A1A129B1D93200FEA346 /* ContributionGraphApp.swift */,
+				BFD5A1E229B5AC4600FEA346 /* CoreData */,
 				BFD5A1B929B23DDE00FEA346 /* Model */,
+				BF164EC729B635670062C04E /* ViewModel */,
 				BFD5A1B729B23D9E00FEA346 /* View */,
 				BFD5A1A529B1D93300FEA346 /* Assets.xcassets */,
 				BFD5A1A729B1D93300FEA346 /* Preview Content */,
@@ -86,6 +108,8 @@
 			isa = PBXGroup;
 			children = (
 				BFD5A1B329B23D0300FEA346 /* MenuView.swift */,
+				BF164EC329B632DF0062C04E /* RoutineListView.swift */,
+				BFABB7AE29C5DD18003F3227 /* CreateNewItemView.swift */,
 				BFD5A1BE29B5808600FEA346 /* TodayView.swift */,
 				BFD5A1A329B1D93200FEA346 /* ContentView.swift */,
 				BFD5A1B529B23D9500FEA346 /* GraphView.swift */,
@@ -97,6 +121,7 @@
 		BFD5A1B829B23DC800FEA346 /* Component */ = {
 			isa = PBXGroup;
 			children = (
+				BF164EC829B8C50B0062C04E /* CalendarView.swift */,
 				BFD5A1AF29B1E1BA00FEA346 /* Hero.swift */,
 				BFD5A1BA29B2465100FEA346 /* Block.swift */,
 			);
@@ -110,6 +135,15 @@
 				BFD5A1BC29B24F6500FEA346 /* OneDay.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		BFD5A1E229B5AC4600FEA346 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				BFD5A1E029B5AC3800FEA346 /* Persistence.swift */,
+				BFD5A1E329B5ACCB00FEA346 /* ContributionGraph.xcdatamodeld */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -187,10 +221,16 @@
 				BFD5A1A429B1D93200FEA346 /* ContentView.swift in Sources */,
 				BFD5A1A229B1D93200FEA346 /* ContributionGraphApp.swift in Sources */,
 				BFD5A1BF29B5808600FEA346 /* TodayView.swift in Sources */,
+				BF164EC629B635600062C04E /* RoutineListViewModel.swift in Sources */,
+				BF164EC429B632DF0062C04E /* RoutineListView.swift in Sources */,
 				BFD5A1B029B1E1BA00FEA346 /* Hero.swift in Sources */,
+				BF164EC929B8C50B0062C04E /* CalendarView.swift in Sources */,
 				BFD5A1B229B1E51D00FEA346 /* Category.swift in Sources */,
+				BFD5A1E529B5ACCB00FEA346 /* ContributionGraph.xcdatamodeld in Sources */,
 				BFD5A1B629B23D9500FEA346 /* GraphView.swift in Sources */,
+				BFABB7AF29C5DD18003F3227 /* CreateNewItemView.swift in Sources */,
 				BFD5A1BD29B24F6500FEA346 /* OneDay.swift in Sources */,
+				BFD5A1E129B5AC3900FEA346 /* Persistence.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -391,6 +431,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		BFD5A1E329B5ACCB00FEA346 /* ContributionGraph.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				BFD5A1E429B5ACCB00FEA346 /* ContributionGraph.xcdatamodel */,
+			);
+			currentVersion = BFD5A1E429B5ACCB00FEA346 /* ContributionGraph.xcdatamodel */;
+			path = ContributionGraph.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = BFD5A19629B1D93200FEA346 /* Project object */;
 }
