@@ -32,7 +32,7 @@ class RoutineListViewModel: ObservableObject {
         let item1 = RoutineItem(name: "Tech", icon: "😀", category: .study)
         let item2 = RoutineItem(name: "Language", icon: "😀", category: .entertainment)
         let item3 = RoutineItem(name: "Sport", icon: "😀", category: .finance)
-        let item4 = RoutineItem(name: "Reading", icon: "😀", category: .health)
+        let item4 = RoutineItem(name: "Reading", icon: "😂", category: .health)
         let item5 = RoutineItem(name: "Activity", icon: "😀", category: .relationships)
         
         self.items.append(item1)
@@ -63,6 +63,8 @@ class RoutineListViewModel: ObservableObject {
         }
     }
     
+    
+    // MARK: - Routine List
     func archiveItem(_ item: RoutineItem) {
         if let index = items.firstIndex(where: { $0.id == item.id }) {
             items[index].isArchived.toggle()
@@ -72,6 +74,19 @@ class RoutineListViewModel: ObservableObject {
     func deleteItem(_ item: RoutineItem) {
         if let index = items.firstIndex(where: { $0.id == item.id }) {
             items.remove(at: index)
+        }
+    }
+    
+    func createItem(_ item: RoutineItem) {
+        items.append(item)
+    }
+    
+    func updateItem(at id: UUID, by item: RoutineItem) {
+        if let index = items.firstIndex(where: { $0.id == id }) {
+            items[index].name = item.name
+            items[index].icon = item.icon
+            items[index].category = item.category
+            items[index].description = item.description
         }
     }
 }

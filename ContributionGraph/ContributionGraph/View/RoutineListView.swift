@@ -12,6 +12,7 @@ struct RoutineListView: View {
     @EnvironmentObject var routineListVM: RoutineListViewModel
     
     @State var isShown = false
+    @State var selectedRoutine: RoutineItem? = nil
     
     var body: some View {
         NavigationStack {
@@ -25,12 +26,22 @@ struct RoutineListView: View {
                         .swipeActions(
                             edge: .trailing,
                             allowsFullSwipe: true) {
-                                Button {
-                                    routineListVM.archiveItem(item)
-                                } label: {
-                                    Label("Archive", systemImage: "archivebox")
+                                HStack {
+                                    Button {
+                                        routineListVM.archiveItem(item)
+                                    } label: {
+                                        Label("Archive", systemImage: "archivebox")
+                                    }
+                                    .tint(.red)
+                                    
+                                    Button {
+                                        selectedRoutine = item
+                                        isShown.toggle()
+                                    } label: {
+                                        Label("Edit", systemImage: "pencil")
+                                    }
+                                    .tint(.green)
                                 }
-                                .tint(.red)
                             }
                     }
                 }
@@ -52,6 +63,7 @@ struct RoutineListView: View {
                                         Label("Delete", systemImage: "trash")
                                     }
                                     .tint(.red)
+                                    
                                     Button {
                                         routineListVM.archiveItem(item)
                                     } label: {
@@ -74,16 +86,16 @@ struct RoutineListView: View {
                 }
             }
             .sheet(isPresented: $isShown) {
-                CreateNewItemView(isShown: $isShown)
+                CreateNewItemView(
+                    isShown: $isShown,
+                    selectedRoutine: $selectedRoutine)
             }
         }
     }
     
     func addItem() -> Void {
+        selectedRoutine = nil
         isShown.toggle()
-        
-//        let newItem = RoutineItem(name: "new one", imageName: "", category: .activity)
-//        routineListVM.items.append(newItem)
     }
 }
 

@@ -12,6 +12,7 @@ struct CreateNewItemView: View {
     @EnvironmentObject var routineListVM: RoutineListViewModel
     
     @Binding var isShown: Bool
+    @Binding var selectedRoutine: RoutineItem?
     
     let emojis = ["😀", "😆", "😂", "🤣", "😊",
                   "😘", "😛", "😜", "🤪", "😝",
@@ -23,7 +24,7 @@ struct CreateNewItemView: View {
     
     @State private var name = ""
     @State private var selectedIcon = "😀"
-    @State private var selectedCategory = Category.study
+    @State private var selectedCategory: Category = .study
     @State private var description = ""
     
     var body: some View {
@@ -54,7 +55,7 @@ struct CreateNewItemView: View {
                 
                 Section("Category") {
                     Picker("", selection: $selectedCategory) {
-                        ForEach(Category.allCases) { category in
+                        ForEach(Category.allCases, id: \.self) { category in
                             Text(category.rawValue)
                         }
                     }
@@ -70,7 +71,7 @@ struct CreateNewItemView: View {
                         }
                 }
             }
-            .navigationTitle("New Item")
+            .navigationTitle(selectedRoutine?.name ?? "New Item")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
@@ -81,7 +82,12 @@ struct CreateNewItemView: View {
                             category: selectedCategory,
                             description: description
                         )
-                        routineListVM.items.append(newItem)
+                        
+                        if let selectedRoutine = selectedRoutine {
+                            routineListVM.updateItem(at: selectedRoutine.id, by: newItem)
+                        } else {
+                            routineListVM.createItem(newItem)
+                        }
                         
                         isShown.toggle()
                     }) {
@@ -97,12 +103,22 @@ struct CreateNewItemView: View {
                 }
             }
         }
+        .onAppear {
+            if let selectedRoutine = selectedRoutine {
+                name = selectedRoutine.name
+                selectedIcon = selectedRoutine.icon
+                selectedCategory = selectedRoutine.category
+                description = selectedRoutine.description
+            }
+        }
     }
 }
 
 struct CreateNewItemView_Previews: PreviewProvider {
     static var previews: some View {
-        CreateNewItemView(isShown: .constant(true))
+        CreateNewItemView(
+            isShown: .constant(true),
+            selectedRoutine: .constant(nil))
             .environmentObject(RoutineListViewModel())
     }
 }
