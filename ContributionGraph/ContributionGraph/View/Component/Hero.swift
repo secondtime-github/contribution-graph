@@ -16,7 +16,7 @@ struct Hero: View {
             }
             Image(systemName: "hand.thumbsup.fill")
                 .imageScale(.large)
-                .foregroundColor(.green)
+                .foregroundColor(.accentColor)
             Text("Keep going and never give up!")
                 .font(.title)
             HStack {
@@ -27,6 +27,7 @@ struct Hero: View {
         .padding()
         .background(.gray.opacity(0.3))
         .cornerRadius(16)
+        .padding()
     }
 }
 

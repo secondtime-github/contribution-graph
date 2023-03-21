@@ -12,6 +12,30 @@ struct ContentView: View {
     @EnvironmentObject var routineListVM: RoutineListViewModel
     
     @State var currentDate: Date = Date()
+    var formattedCurrentDate: String {
+        dateFormatter.string(from: currentDate)
+    }
+    
+    let statusList = ["All", "Completed", "Not Completed"]
+    @State var currentStatus = "All"
+    
+    var currentDay: OneDay? {
+        routineListVM.days[formattedCurrentDate]
+    }
+    
+    var filteredTasks: [RoutineItem] {
+        let filteredItems = routineListVM.items.filter { !$0.isArchived }
+        let currentCompletedItems = currentDay?.tasks.filter { $0.value.isDone }.map { $0.key } ?? []
+        
+        if currentStatus == "Completed" {
+            return currentCompletedItems
+        } else if currentStatus == "All" {
+            return filteredItems
+        } else {
+            let diff = Set(filteredItems).subtracting(Set(currentCompletedItems))
+            return Array(diff)
+        }
+    }
     
     let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -42,40 +66,43 @@ struct ContentView: View {
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
-                    ForEach(Category.allCases) { category in
-                        Button(action: {}) {
-                            Text(category.rawValue)
-                                .foregroundColor(.black)
+                    ForEach(statusList, id: \.self) { status in
+                        Button(action: {
+                            currentStatus = status
+                        }) {
+                            Text(status)
+                                .foregroundColor(.primary)
                                 .padding()
-                                .background(.green.opacity(0.5))
+                                .frame(minWidth: 120)
+                                .background(.green.opacity(
+                                    currentStatus == status ? 1 : 0.5)
+                                )
                                 .cornerRadius(16)
                         }
                     }
                 }
             }
+            .padding()
             
             List {
-                ForEach(routineListVM.items.filter({!$0.isArchived}), id: \.self) { item in
+                ForEach(filteredTasks, id: \.self) { item in
                     HStack {
-                        Image(systemName: "dumbbell")
+                        Text(item.icon)
                         Text(item.name)
                         Spacer()
                         
                         Button(action: {
                             routineListVM.changeTaskStatus(item, at: currentDate)
                         }) {
-                            Image(systemName: routineListVM
-                                .days[dateFormatter.string(from: currentDate)]?
-                                .tasks[item]?.isDone ?? false
+                            Image(systemName: currentDay?.tasks[item]?.isDone ?? false
                                   ? "checkmark.circle.fill"
                                   : "circle")
                         }
-                        .foregroundColor(.green)
                     }
                 }
             }
         }
-        .padding()
+        
     }
 }
 
