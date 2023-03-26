@@ -15,7 +15,9 @@ struct ContributionGraphApp: App {
     var body: some Scene {
         WindowGroup {
             MenuView()
-                .environmentObject(RoutineListViewModel())
+                .environmentObject(
+                    RoutineListViewModel(context: persistenceController.container.viewContext)
+                )
                 .environment(
                     \.managedObjectContext,
                      persistenceController.container.viewContext

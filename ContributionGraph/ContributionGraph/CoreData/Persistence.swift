@@ -14,7 +14,7 @@ struct PersistenceController {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
         for i in 0..<10 {
-            let diary = Diary(context: viewContext)
+            let diary = DiaryEntity(context: viewContext)
             diary.date = Calendar.current.date(byAdding: .day, value: -i, to: Date())!
         }
         do {

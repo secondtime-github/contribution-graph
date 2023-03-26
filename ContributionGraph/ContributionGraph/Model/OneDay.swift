@@ -23,7 +23,7 @@ struct Task: Hashable {
 }
 
 struct RoutineItem: Hashable, Identifiable {
-    let id = UUID()
+    var id: UUID
     var isArchived: Bool = false
     
     var name: String

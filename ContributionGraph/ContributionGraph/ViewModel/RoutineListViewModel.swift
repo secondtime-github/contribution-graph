@@ -12,34 +12,13 @@ class RoutineListViewModel: ObservableObject {
     
     // 习惯清单
     @Published var items: [RoutineItem] = []
-    
     @Published var days = [String : OneDay]()
     
-    func loadItems() {
-        let request: NSFetchRequest<RoutineEntity> = RoutineEntity.fetchRequest()
-        do {
-            let routineEntities = try PersistenceController.shared.container.viewContext.fetch(request)
-            
-            self.items = routineEntities.map {
-                RoutineItem(name: $0.name ?? "", icon: $0.imageName ?? "")
-            }
-        } catch {
-            print("Error fetching tasks")
-        }
-    }
+    private let viewContext: NSManagedObjectContext
     
-    init() {
-        let item1 = RoutineItem(name: "Tech", icon: "😀", category: .study)
-        let item2 = RoutineItem(name: "Language", icon: "😀", category: .entertainment)
-        let item3 = RoutineItem(name: "Sport", icon: "😀", category: .finance)
-        let item4 = RoutineItem(name: "Reading", icon: "😂", category: .health)
-        let item5 = RoutineItem(name: "Activity", icon: "😀", category: .relationships)
-        
-        self.items.append(item1)
-        self.items.append(item2)
-        self.items.append(item3)
-        self.items.append(item4)
-        self.items.append(item5)
+    init(context: NSManagedObjectContext) {
+        self.viewContext = context
+        //fetchItems()
     }
     
     let dateFormatter: DateFormatter = {
@@ -65,28 +44,105 @@ class RoutineListViewModel: ObservableObject {
     
     
     // MARK: - Routine List
-    func archiveItem(_ item: RoutineItem) {
-        if let index = items.firstIndex(where: { $0.id == item.id }) {
-            items[index].isArchived.toggle()
+    /// show routine list
+    func fetchItems() {
+        let request: NSFetchRequest<RoutineEntity> = RoutineEntity.fetchRequest()
+        let routineEntities = (try? viewContext.fetch(request)) ?? []
+        self.items = routineEntities.map {
+            RoutineItem(
+                id: UUID(uuidString: $0.id ?? "") ?? UUID(),
+                isArchived: $0.isArchived,
+                name: $0.name ?? "",
+                icon: $0.icon ?? "",
+                category: Category(rawValue: $0.category ?? "") ?? .study,
+                description: $0.content ?? ""
+            )
         }
     }
     
-    func deleteItem(_ item: RoutineItem) {
-        if let index = items.firstIndex(where: { $0.id == item.id }) {
+    /// create new routine
+    func createItem(_ item: RoutineItem) {
+        let newItem = RoutineEntity(context: viewContext)
+        newItem.id = item.id.uuidString
+        newItem.name = item.name
+        newItem.icon = item.icon
+        newItem.category = item.category.rawValue
+        newItem.content = item.description
+        newItem.isArchived = item.isArchived
+        
+        do {
+            try viewContext.save()
+            items.append(item)
+        } catch {
+            
+        }
+    }
+    
+    /// delete a routine from list
+    func deleteItem(at id: UUID) {
+        let request: NSFetchRequest<RoutineEntity> = RoutineEntity.fetchRequest()
+        request.predicate = NSPredicate(format: "id = %@", id as CVarArg)
+        
+        do {
+            let results = try viewContext.fetch(request)
+            for result in results {
+                viewContext.delete(result)
+            }
+            try viewContext.save()
+        } catch {
+            print("Error deleting routine item: \(error)")
+        }
+        
+        if let index = items.firstIndex(where: { $0.id == id }) {
             items.remove(at: index)
         }
     }
     
-    func createItem(_ item: RoutineItem) {
-        items.append(item)
+    /// change archive state
+    func archiveItem(at id: UUID) {
+        if let index = items.firstIndex(where: { $0.id == id }) {
+            items[index].isArchived.toggle()
+        }
+        
+        let request: NSFetchRequest<RoutineEntity> = RoutineEntity.fetchRequest()
+        request.predicate = NSPredicate(format: "id == %@", id as CVarArg)
+        
+        do {
+            let results = try viewContext.fetch(request)
+            if let routine = results.first {
+                routine.isArchived.toggle()
+                
+                try viewContext.save()
+            }
+        } catch {
+            print("Error updating routine: \(error.localizedDescription)")
+        }
     }
     
+    /// update routine info
     func updateItem(at id: UUID, by item: RoutineItem) {
         if let index = items.firstIndex(where: { $0.id == id }) {
             items[index].name = item.name
             items[index].icon = item.icon
             items[index].category = item.category
             items[index].description = item.description
+        }
+        
+        let request: NSFetchRequest<RoutineEntity> = RoutineEntity.fetchRequest()
+        request.predicate = NSPredicate(format: "id == %@", id as CVarArg)
+        
+        do {
+            let results = try viewContext.fetch(request)
+            if let routine = results.first {
+                routine.name = item.name
+                routine.icon = item.icon
+                routine.category = item.category.rawValue
+                routine.content = item.description
+                
+                try viewContext.save()
+            }
+        } catch {
+            print("Error updating routine: \(error.localizedDescription)")
         }
     }
 }

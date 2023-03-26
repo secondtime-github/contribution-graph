@@ -22,7 +22,7 @@ struct TodayView: View {
         let endDate = calendar.date(byAdding: .day, value: 1, to: startDate)!
         
         let predicate = NSPredicate(format: "date >= %@ AND date < %@", startDate as NSDate, endDate as NSDate)
-        let fetchRequest: NSFetchRequest<Diary> = Diary.fetchRequest()
+        let fetchRequest: NSFetchRequest<DiaryEntity> = DiaryEntity.fetchRequest()
         fetchRequest.predicate = predicate
         
         do {
@@ -93,6 +93,6 @@ struct TodayView_Previews: PreviewProvider {
                 \.managedObjectContext,
                  PersistenceController.preview.container.viewContext
             )
-            .environmentObject(RoutineListViewModel())
+            .environmentObject(RoutineListViewModel(context: PersistenceController.preview.container.viewContext))
     }
 }

@@ -30,7 +30,7 @@ struct Block: View {
             return .green.opacity(0.6)
         case 4:
             return .green.opacity(0.8)
-        case 5:
+        case 5...:
             return .green
         default:
             return .white

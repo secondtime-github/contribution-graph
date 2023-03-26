@@ -39,6 +39,8 @@ struct GraphView: View {
             
             CalendarView(year: Calendar.current.component(.year, from: currentDate),
                          month: Calendar.current.component(.month, from: currentDate))
+            
+            Spacer()
         }
     }
 }
@@ -46,6 +48,6 @@ struct GraphView: View {
 struct GraphView_Previews: PreviewProvider {
     static var previews: some View {
         GraphView()
-            .environmentObject(RoutineListViewModel())
+            .environmentObject(RoutineListViewModel(context: PersistenceController.preview.container.viewContext))
     }
 }
