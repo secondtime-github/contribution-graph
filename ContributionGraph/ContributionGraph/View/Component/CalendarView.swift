@@ -71,7 +71,7 @@ struct CalendarView: View {
                     if let key = formatDate(year: year, month: month, day: day) {
                         
                         if routineListVM.days[key] != nil {
-                            Block()
+                            Block(value: routineListVM.days[key]!.completion)
                         } else {
                             Block(value: 0)
                         }
@@ -88,6 +88,6 @@ struct CalendarView: View {
 struct CalendarView_Previews: PreviewProvider {
     static var previews: some View {
         CalendarView(year: 2023, month: 3)
-            .environmentObject(RoutineListViewModel())
+            .environmentObject(RoutineListViewModel(context: PersistenceController.preview.container.viewContext))
     }
 }

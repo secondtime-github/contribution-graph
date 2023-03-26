@@ -77,6 +77,7 @@ struct CreateNewItemView: View {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: {
                         let newItem = RoutineItem(
+                            id: UUID(),
                             name: name,
                             icon: selectedIcon,
                             category: selectedCategory,
@@ -111,6 +112,7 @@ struct CreateNewItemView: View {
                 description = selectedRoutine.description
             }
         }
+        .scrollDismissesKeyboard(.immediately)
     }
 }
 
@@ -119,6 +121,6 @@ struct CreateNewItemView_Previews: PreviewProvider {
         CreateNewItemView(
             isShown: .constant(true),
             selectedRoutine: .constant(nil))
-            .environmentObject(RoutineListViewModel())
+            .environmentObject(RoutineListViewModel(context: PersistenceController.preview.container.viewContext))
     }
 }
