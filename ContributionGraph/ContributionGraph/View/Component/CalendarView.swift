@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CalendarView: View {
     
-    @EnvironmentObject var routineListVM: RoutineListViewModel
+    @EnvironmentObject var routineListVM: ViewModel
     
     let year: Int
     let month: Int
@@ -88,6 +88,6 @@ struct CalendarView: View {
 struct CalendarView_Previews: PreviewProvider {
     static var previews: some View {
         CalendarView(year: 2023, month: 3)
-            .environmentObject(RoutineListViewModel(context: PersistenceController.preview.container.viewContext))
+            .environmentObject(ViewModel(context: PersistenceController.preview.container.viewContext))
     }
 }

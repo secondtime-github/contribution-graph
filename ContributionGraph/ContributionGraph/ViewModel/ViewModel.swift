@@ -8,7 +8,7 @@
 import Foundation
 import CoreData
 
-class RoutineListViewModel: ObservableObject {
+class ViewModel: ObservableObject {
     
     // 习惯清单
     @Published var items: [RoutineItem] = []

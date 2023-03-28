@@ -13,9 +13,23 @@ struct PersistenceController {
     static var preview: PersistenceController = {
         let result = PersistenceController(inMemory: true)
         let viewContext = result.container.viewContext
-        for i in 0..<10 {
+        for i in 0..<5 {
             let diary = DiaryEntity(context: viewContext)
-            diary.date = Calendar.current.date(byAdding: .day, value: -i, to: Date())!
+            diary.date = "2023-03-28"
+            
+            let routine = RoutineEntity(context: viewContext)
+            routine.id = "1234\(i)"
+            routine.name = "AAA\(i)"
+            routine.icon = "🍸"
+            routine.category = "Finance"
+            routine.content = "description"
+            routine.isArchived = false
+            
+            let task = TaskEntity(context: viewContext)
+            //task.id = UUID()
+            
+            task.oneDay = diary
+            task.category = routine
         }
         do {
             try viewContext.save()

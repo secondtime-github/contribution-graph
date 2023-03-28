@@ -9,7 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @EnvironmentObject var routineListVM: RoutineListViewModel
+    @EnvironmentObject var routineListVM: ViewModel
     
     @State var currentDate: Date = Date()
     var formattedCurrentDate: String {
@@ -109,6 +109,6 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-            .environmentObject(RoutineListViewModel(context: PersistenceController.preview.container.viewContext))
+            .environmentObject(ViewModel(context: PersistenceController.preview.container.viewContext))
     }
 }

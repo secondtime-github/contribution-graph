@@ -27,7 +27,7 @@ struct TodayView: View {
         
         do {
             let diaries = try self.viewContext.fetch(fetchRequest)
-            self.diaries = diaries.first?.date
+            //self.diaries = diaries.first?.date
         } catch let error as NSError {
             print("Failed to fetch diaries: \(error.localizedDescription)")
         }
@@ -93,6 +93,6 @@ struct TodayView_Previews: PreviewProvider {
                 \.managedObjectContext,
                  PersistenceController.preview.container.viewContext
             )
-            .environmentObject(RoutineListViewModel(context: PersistenceController.preview.container.viewContext))
+            .environmentObject(ViewModel(context: PersistenceController.preview.container.viewContext))
     }
 }

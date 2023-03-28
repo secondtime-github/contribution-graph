@@ -35,6 +35,10 @@ struct MenuView: View {
 struct MenuView_Previews: PreviewProvider {
     static var previews: some View {
         MenuView()
-            .environmentObject(RoutineListViewModel(context: PersistenceController.preview.container.viewContext))
+            .environmentObject(ViewModel(context: PersistenceController.preview.container.viewContext))
+            .environment(
+                \.managedObjectContext,
+                 PersistenceController.preview.container.viewContext
+            )
     }
 }

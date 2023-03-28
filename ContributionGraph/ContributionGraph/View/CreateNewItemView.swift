@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CreateNewItemView: View {
     
-    @EnvironmentObject var routineListVM: RoutineListViewModel
+    @EnvironmentObject var routineListVM: ViewModel
     
     @Binding var isShown: Bool
     @Binding var selectedRoutine: RoutineItem?
@@ -121,6 +121,6 @@ struct CreateNewItemView_Previews: PreviewProvider {
         CreateNewItemView(
             isShown: .constant(true),
             selectedRoutine: .constant(nil))
-            .environmentObject(RoutineListViewModel(context: PersistenceController.preview.container.viewContext))
+            .environmentObject(ViewModel(context: PersistenceController.preview.container.viewContext))
     }
 }

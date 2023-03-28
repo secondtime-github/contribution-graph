@@ -48,6 +48,6 @@ struct GraphView: View {
 struct GraphView_Previews: PreviewProvider {
     static var previews: some View {
         GraphView()
-            .environmentObject(RoutineListViewModel(context: PersistenceController.preview.container.viewContext))
+            .environmentObject(ViewModel(context: PersistenceController.preview.container.viewContext))
     }
 }

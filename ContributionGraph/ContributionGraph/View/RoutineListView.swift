@@ -10,7 +10,7 @@ import CoreData
 
 struct RoutineListView: View {
     
-    @EnvironmentObject var routineListVM: RoutineListViewModel
+    @EnvironmentObject var routineListVM: ViewModel
     
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \RoutineEntity.name, ascending: true)],
@@ -116,7 +116,7 @@ struct RoutineListView: View {
 struct RoutineListView_Previews: PreviewProvider {
     static var previews: some View {
         RoutineListView()
-            .environmentObject(RoutineListViewModel(context: PersistenceController.preview.container.viewContext))
+            .environmentObject(ViewModel(context: PersistenceController.preview.container.viewContext))
             .environment(
                 \.managedObjectContext,
                  PersistenceController.preview.container.viewContext
