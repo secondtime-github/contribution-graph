@@ -9,32 +9,34 @@ import SwiftUI
 
 struct ContentView: View {
     
-    @EnvironmentObject var routineListVM: RoutineListViewModel
+    @EnvironmentObject var vm: TodayViewModel
     
-    @State var currentDate: Date = Date()
-    var formattedCurrentDate: String {
-        dateFormatter.string(from: currentDate)
-    }
+    @FetchRequest(
+        sortDescriptors: [NSSortDescriptor(keyPath: \RoutineEntity.name, ascending: true)],
+        animation: .default
+    )
+    private var routineEntities: FetchedResults<RoutineEntity>
     
     let statusList = ["All", "Completed", "Not Completed"]
     @State var currentStatus = "All"
     
-    var currentDay: OneDay? {
-        routineListVM.days[formattedCurrentDate]
-    }
-    
-    var filteredTasks: [RoutineItem] {
-        let filteredItems = routineListVM.items.filter { !$0.isArchived }
-        let currentCompletedItems = currentDay?.tasks.filter { $0.value.isDone }.map { $0.key } ?? []
-        
-        if currentStatus == "Completed" {
-            return currentCompletedItems
-        } else if currentStatus == "All" {
-            return filteredItems
-        } else {
-            let diff = Set(filteredItems).subtracting(Set(currentCompletedItems))
+    var filteredRoutines: [Routine] {
+        let allRoutines: [Routine] = routineEntities.map { Routine(entity: $0) }
+        let completedRoutines: [Routine] = vm.tasks.filter { $0.value } .map { $0.key }
+
+        switch currentStatus {
+        case "All":
+            return allRoutines
+        case "Completed":
+            return completedRoutines
+        default:
+            let diff = Set(allRoutines).subtracting(Set(completedRoutines))
             return Array(diff)
         }
+    }
+    
+    var formattedCurrentDate: String {
+        dateFormatter.string(from: vm.currentDate)
     }
     
     let dateFormatter: DateFormatter = {
@@ -47,15 +49,15 @@ struct ContentView: View {
         VStack {
             HStack {
                 Button(action: {
-                    currentDate = Calendar.current.date(byAdding: .day, value: -1, to: currentDate)!
+                    vm.currentDate = Calendar.current.date(byAdding: .day, value: -1, to: vm.currentDate)!
                 }) {
                     Image(systemName: "arrow.left")
                 }
                 
-                Text(dateFormatter.string(from: currentDate))
+                Text(formattedCurrentDate)
                 
                 Button(action: {
-                    currentDate = Calendar.current.date(byAdding: .day, value: 1, to: currentDate)!
+                    vm.currentDate = Calendar.current.date(byAdding: .day, value: 1, to: vm.currentDate)!
                 }) {
                     Image(systemName: "arrow.right")
                 }
@@ -85,16 +87,16 @@ struct ContentView: View {
             .padding()
             
             List {
-                ForEach(filteredTasks, id: \.self) { item in
+                ForEach(filteredRoutines, id: \.self) { routine in
                     HStack {
-                        Text(item.icon)
-                        Text(item.name)
+                        Text(routine.icon)
+                        Text(routine.name)
                         Spacer()
                         
                         Button(action: {
-                            routineListVM.changeTaskStatus(item, at: currentDate)
+                            vm.toggleTask(with: routine)
                         }) {
-                            Image(systemName: currentDay?.tasks[item]?.isDone ?? false
+                            Image(systemName: vm.tasks[routine] ?? false
                                   ? "checkmark.circle.fill"
                                   : "circle")
                         }
@@ -109,6 +111,10 @@ struct ContentView: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         ContentView()
-            .environmentObject(RoutineListViewModel(context: PersistenceController.preview.container.viewContext))
+            .environmentObject(TodayViewModel(context: PersistenceController.preview.container.viewContext))
+            .environment(
+                \.managedObjectContext,
+                 PersistenceController.preview.container.viewContext
+            )
     }
 }

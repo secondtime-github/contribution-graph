@@ -9,9 +9,7 @@ import SwiftUI
 
 struct GraphView: View {
     
-    
-    
-    @State var currentDate: Date = Date()
+    @EnvironmentObject var vm: GraphViewModel
     
     let dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -23,24 +21,27 @@ struct GraphView: View {
         VStack {
             HStack {
                 Button(action: {
-                    currentDate = Calendar.current.date(byAdding: .month, value: -1, to: currentDate)!
+                    vm.currentDate = Calendar.current.date(byAdding: .month, value: -1, to: vm.currentDate)!
                 }) {
                     Image(systemName: "arrow.left")
                 }
                 
-                Text(dateFormatter.string(from: currentDate))
+                Text(dateFormatter.string(from: vm.currentDate))
                 
                 Button(action: {
-                    currentDate = Calendar.current.date(byAdding: .month, value: 1, to: currentDate)!
+                    vm.currentDate = Calendar.current.date(byAdding: .month, value: 1, to: vm.currentDate)!
                 }) {
                     Image(systemName: "arrow.right")
                 }
             }
             
-            CalendarView(year: Calendar.current.component(.year, from: currentDate),
-                         month: Calendar.current.component(.month, from: currentDate))
+            CalendarView(year: Calendar.current.component(.year, from: vm.currentDate),
+                         month: Calendar.current.component(.month, from: vm.currentDate))
             
             Spacer()
+        }
+        .onAppear {
+            vm.fetchCounts()
         }
     }
 }
@@ -48,6 +49,6 @@ struct GraphView: View {
 struct GraphView_Previews: PreviewProvider {
     static var previews: some View {
         GraphView()
-            .environmentObject(RoutineListViewModel(context: PersistenceController.preview.container.viewContext))
+            .environmentObject(GraphViewModel(context: PersistenceController.preview.container.viewContext))
     }
 }

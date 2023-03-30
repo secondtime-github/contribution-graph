@@ -9,10 +9,10 @@ import SwiftUI
 
 struct CreateNewItemView: View {
     
-    @EnvironmentObject var routineListVM: RoutineListViewModel
+    @EnvironmentObject var vm: RoutineListViewModel
     
     @Binding var isShown: Bool
-    @Binding var selectedRoutine: RoutineItem?
+    @Binding var selectedRoutineEntity: RoutineEntity?
     
     let emojis = ["😀", "😆", "😂", "🤣", "😊",
                   "😘", "😛", "😜", "🤪", "😝",
@@ -71,27 +71,11 @@ struct CreateNewItemView: View {
                         }
                 }
             }
-            .navigationTitle(selectedRoutine?.name ?? "New Item")
+            .navigationTitle(selectedRoutineEntity?.name ?? "New Item")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    Button(action: {
-                        let newItem = RoutineItem(
-                            id: UUID(),
-                            name: name,
-                            icon: selectedIcon,
-                            category: selectedCategory,
-                            description: description
-                        )
-                        
-                        if let selectedRoutine = selectedRoutine {
-                            routineListVM.updateItem(at: selectedRoutine.id, by: newItem)
-                        } else {
-                            routineListVM.createItem(newItem)
-                        }
-                        
-                        isShown.toggle()
-                    }) {
+                    Button(action: updateRoutine) {
                         Text("Save")
                     }
                 }
@@ -105,14 +89,32 @@ struct CreateNewItemView: View {
             }
         }
         .onAppear {
-            if let selectedRoutine = selectedRoutine {
+            if let selectedRoutineEntity = selectedRoutineEntity {
+                let selectedRoutine = Routine(entity: selectedRoutineEntity)
                 name = selectedRoutine.name
                 selectedIcon = selectedRoutine.icon
                 selectedCategory = selectedRoutine.category
                 description = selectedRoutine.description
             }
         }
-        .scrollDismissesKeyboard(.immediately)
+        .scrollDismissesKeyboard(.automatic)
+    }
+    
+    func updateRoutine() {
+        let newRoutineInfo = Routine(
+            name: name,
+            icon: selectedIcon,
+            category: selectedCategory,
+            description: description
+        )
+        
+        if let selectedRoutineEntity = selectedRoutineEntity {
+            vm.update(selectedRoutineEntity, by: newRoutineInfo)
+        } else {
+            vm.create(newRoutineInfo)
+        }
+        
+        isShown.toggle()
     }
 }
 
@@ -120,7 +122,7 @@ struct CreateNewItemView_Previews: PreviewProvider {
     static var previews: some View {
         CreateNewItemView(
             isShown: .constant(true),
-            selectedRoutine: .constant(nil))
-            .environmentObject(RoutineListViewModel(context: PersistenceController.preview.container.viewContext))
+            selectedRoutineEntity: .constant(nil))
+        .environmentObject(RoutineListViewModel(context: PersistenceController.preview.container.viewContext))
     }
 }

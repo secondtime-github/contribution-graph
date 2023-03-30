@@ -10,18 +10,12 @@ import SwiftUI
 @main
 struct ContributionGraphApp: App {
     
-    let persistenceController = PersistenceController.shared
+    let viewContext = PersistenceController.shared.container.viewContext
     
     var body: some Scene {
         WindowGroup {
             MenuView()
-                .environmentObject(
-                    RoutineListViewModel(context: persistenceController.container.viewContext)
-                )
-                .environment(
-                    \.managedObjectContext,
-                     persistenceController.container.viewContext
-                )
+                .environment(\.managedObjectContext, viewContext)
         }
     }
 }

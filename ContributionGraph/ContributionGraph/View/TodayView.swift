@@ -17,20 +17,20 @@ struct TodayView: View {
     @State var diaries: Date?
     
     func fetchDiaries(forDate date: Date) {
-        let calendar = Calendar.current
-        let startDate = calendar.startOfDay(for: date)
-        let endDate = calendar.date(byAdding: .day, value: 1, to: startDate)!
-        
-        let predicate = NSPredicate(format: "date >= %@ AND date < %@", startDate as NSDate, endDate as NSDate)
-        let fetchRequest: NSFetchRequest<DiaryEntity> = DiaryEntity.fetchRequest()
-        fetchRequest.predicate = predicate
-        
-        do {
-            let diaries = try self.viewContext.fetch(fetchRequest)
-            self.diaries = diaries.first?.date
-        } catch let error as NSError {
-            print("Failed to fetch diaries: \(error.localizedDescription)")
-        }
+//        let calendar = Calendar.current
+//        let startDate = calendar.startOfDay(for: date)
+//        let endDate = calendar.date(byAdding: .day, value: 1, to: startDate)!
+//
+//        let predicate = NSPredicate(format: "date >= %@ AND date < %@", startDate as NSDate, endDate as NSDate)
+//        let fetchRequest: NSFetchRequest<DiaryEntity> = DiaryEntity.fetchRequest()
+//        fetchRequest.predicate = predicate
+//
+//        do {
+//            let diaries = try self.viewContext.fetch(fetchRequest)
+//            self.diaries = diaries.first?.date
+//        } catch let error as NSError {
+//            print("Failed to fetch diaries: \(error.localizedDescription)")
+//        }
     }
 
     
