@@ -8,8 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		BF164EC429B632DF0062C04E /* RoutineListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF164EC329B632DF0062C04E /* RoutineListView.swift */; };
-		BF164EC629B635600062C04E /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF164EC529B635600062C04E /* ViewModel.swift */; };
+		BF164EC629B635600062C04E /* RoutineListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF164EC529B635600062C04E /* RoutineListViewModel.swift */; };
 		BF164EC929B8C50B0062C04E /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF164EC829B8C50B0062C04E /* CalendarView.swift */; };
+		BF78C2D529D34C6600DEF4EE /* PrintDaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF78C2D429D34C6600DEF4EE /* PrintDaysView.swift */; };
+		BF78C2D729D3E74200DEF4EE /* TodayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF78C2D629D3E74200DEF4EE /* TodayViewModel.swift */; };
+		BF78C2D929D3E76700DEF4EE /* GraphViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF78C2D829D3E76700DEF4EE /* GraphViewModel.swift */; };
 		BFABB7AF29C5DD18003F3227 /* CreateNewItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFABB7AE29C5DD18003F3227 /* CreateNewItemView.swift */; };
 		BFD5A1A229B1D93200FEA346 /* ContributionGraphApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD5A1A129B1D93200FEA346 /* ContributionGraphApp.swift */; };
 		BFD5A1A429B1D93200FEA346 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD5A1A329B1D93200FEA346 /* ContentView.swift */; };
@@ -28,8 +31,11 @@
 
 /* Begin PBXFileReference section */
 		BF164EC329B632DF0062C04E /* RoutineListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineListView.swift; sourceTree = "<group>"; };
-		BF164EC529B635600062C04E /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		BF164EC529B635600062C04E /* RoutineListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineListViewModel.swift; sourceTree = "<group>"; };
 		BF164EC829B8C50B0062C04E /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
+		BF78C2D429D34C6600DEF4EE /* PrintDaysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintDaysView.swift; sourceTree = "<group>"; };
+		BF78C2D629D3E74200DEF4EE /* TodayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewModel.swift; sourceTree = "<group>"; };
+		BF78C2D829D3E76700DEF4EE /* GraphViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphViewModel.swift; sourceTree = "<group>"; };
 		BFABB7AE29C5DD18003F3227 /* CreateNewItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewItemView.swift; sourceTree = "<group>"; };
 		BFD5A19E29B1D93200FEA346 /* ContributionGraph.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ContributionGraph.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFD5A1A129B1D93200FEA346 /* ContributionGraphApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributionGraphApp.swift; sourceTree = "<group>"; };
@@ -61,7 +67,9 @@
 		BF164EC729B635670062C04E /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				BF164EC529B635600062C04E /* ViewModel.swift */,
+				BF164EC529B635600062C04E /* RoutineListViewModel.swift */,
+				BF78C2D629D3E74200DEF4EE /* TodayViewModel.swift */,
+				BF78C2D829D3E76700DEF4EE /* GraphViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -113,6 +121,7 @@
 				BFD5A1A329B1D93200FEA346 /* ContentView.swift */,
 				BFD5A1B529B23D9500FEA346 /* GraphView.swift */,
 				BFD5A1BE29B5808600FEA346 /* TodayView.swift */,
+				BF78C2D429D34C6600DEF4EE /* PrintDaysView.swift */,
 				BFD5A1B829B23DC800FEA346 /* Component */,
 			);
 			path = View;
@@ -221,12 +230,15 @@
 				BFD5A1A429B1D93200FEA346 /* ContentView.swift in Sources */,
 				BFD5A1A229B1D93200FEA346 /* ContributionGraphApp.swift in Sources */,
 				BFD5A1BF29B5808600FEA346 /* TodayView.swift in Sources */,
-				BF164EC629B635600062C04E /* ViewModel.swift in Sources */,
+				BF164EC629B635600062C04E /* RoutineListViewModel.swift in Sources */,
 				BF164EC429B632DF0062C04E /* RoutineListView.swift in Sources */,
+				BF78C2D529D34C6600DEF4EE /* PrintDaysView.swift in Sources */,
 				BFD5A1B029B1E1BA00FEA346 /* Hero.swift in Sources */,
 				BF164EC929B8C50B0062C04E /* CalendarView.swift in Sources */,
 				BFD5A1B229B1E51D00FEA346 /* Category.swift in Sources */,
+				BF78C2D929D3E76700DEF4EE /* GraphViewModel.swift in Sources */,
 				BFD5A1E529B5ACCB00FEA346 /* ContributionGraph.xcdatamodeld in Sources */,
+				BF78C2D729D3E74200DEF4EE /* TodayViewModel.swift in Sources */,
 				BFD5A1B629B23D9500FEA346 /* GraphView.swift in Sources */,
 				BFABB7AF29C5DD18003F3227 /* CreateNewItemView.swift in Sources */,
 				BFD5A1BD29B24F6500FEA346 /* OneDay.swift in Sources */,

@@ -10,46 +10,39 @@ import CoreData
 
 struct RoutineListView: View {
     
-    @EnvironmentObject var routineListVM: ViewModel
+    @EnvironmentObject var vm: RoutineListViewModel
     
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \RoutineEntity.name, ascending: true)],
         animation: .default
     )
-    private var items: FetchedResults<RoutineEntity>
+    private var routineEntities: FetchedResults<RoutineEntity>
     
     @State var isShown = false
-    @State var selectedRoutine: RoutineItem? = nil
+    @State var selectedRoutineEntity: RoutineEntity? = nil
     
     var body: some View {
         NavigationStack {
             List {
                 Section{
-                    ForEach(items.filter({!$0.isArchived})) { item in
+                    ForEach(routineEntities.filter { !$0.isArchived } ) { routineEntity in
                         HStack {
-                            Text(item.icon ?? "")
-                            Text(item.name ?? "")
+                            Text(routineEntity.icon!)
+                            Text(routineEntity.name!)
                         }
                         .swipeActions(
                             edge: .trailing,
                             allowsFullSwipe: true) {
                                 HStack {
                                     Button {
-                                        routineListVM.archiveItem(at: UUID(uuidString: item.id ?? "") ?? UUID())
+                                        vm.archive(routineEntity)
                                     } label: {
                                         Label("Archive", systemImage: "archivebox")
                                     }
                                     .tint(.red)
                                     
                                     Button {
-                                        selectedRoutine = RoutineItem(
-                                            id: UUID(uuidString: item.id ?? "") ?? UUID(),
-                                            isArchived: item.isArchived,
-                                            name: item.name ?? "",
-                                            icon: item.icon ?? "",
-                                            category: Category(rawValue: item.category ?? "") ?? .study,
-                                            description: item.content ?? ""
-                                        )
+                                        selectedRoutineEntity = routineEntity
                                         isShown.toggle()
                                     } label: {
                                         Label("Edit", systemImage: "pencil")
@@ -62,24 +55,24 @@ struct RoutineListView: View {
                 .fontWeight(.bold)
                 
                 Section("Archived") {
-                    ForEach(items.filter({$0.isArchived})) { item in
+                    ForEach(routineEntities.filter { $0.isArchived } ) { routineEntity in
                         HStack {
-                            Text(item.icon ?? "")
-                            Text(item.name ?? "")
+                            Text(routineEntity.icon!)
+                            Text(routineEntity.name!)
                         }
                         .swipeActions(
                             edge: .trailing,
                             allowsFullSwipe: true) {
                                 HStack {
                                     Button {
-                                        routineListVM.deleteItem(at: UUID(uuidString: item.id ?? "") ?? UUID())
+                                        vm.delete(routineEntity)
                                     } label: {
                                         Label("Delete", systemImage: "trash")
                                     }
                                     .tint(.red)
                                     
                                     Button {
-                                        routineListVM.archiveItem(at: UUID(uuidString: item.id ?? "") ?? UUID())
+                                        vm.archive(routineEntity)
                                     } label: {
                                         Label("Back", systemImage: "arrow.uturn.up")
                                     }
@@ -102,13 +95,13 @@ struct RoutineListView: View {
             .sheet(isPresented: $isShown) {
                 CreateNewItemView(
                     isShown: $isShown,
-                    selectedRoutine: $selectedRoutine)
+                    selectedRoutineEntity: $selectedRoutineEntity)
             }
         }
     }
     
     func addItem() -> Void {
-        selectedRoutine = nil
+        selectedRoutineEntity = nil
         isShown.toggle()
     }
 }
@@ -116,7 +109,7 @@ struct RoutineListView: View {
 struct RoutineListView_Previews: PreviewProvider {
     static var previews: some View {
         RoutineListView()
-            .environmentObject(ViewModel(context: PersistenceController.preview.container.viewContext))
+            .environmentObject(RoutineListViewModel(context: PersistenceController.preview.container.viewContext))
             .environment(
                 \.managedObjectContext,
                  PersistenceController.preview.container.viewContext

@@ -9,7 +9,7 @@ import SwiftUI
 
 struct CalendarView: View {
     
-    @EnvironmentObject var routineListVM: ViewModel
+    @EnvironmentObject var vm: GraphViewModel
     
     let year: Int
     let month: Int
@@ -56,27 +56,21 @@ struct CalendarView: View {
     
     var body: some View {
         VStack {
-            //Text("\(year)年\(month)月").font(.title)
+//            Text("\(year)年\(month)月").font(.title)
+//            Text("firstDayOfMonth: \(firstDayOfMonth)")
+//            Text("daysInMonth: \(daysInMonth)")
             
             LazyVGrid(
                 columns: Array(repeating: GridItem(), count: 7),
                 spacing: 10
             ) {
-                ForEach(0..<firstDayOfMonth, id: \.self) { _ in
+                
+                ForEach(100..<firstDayOfMonth+100, id: \.self) { _ in
                     Text("")
                 }
                 
                 ForEach(1...daysInMonth, id: \.self) { day in
-                    
-                    if let key = formatDate(year: year, month: month, day: day) {
-                        
-                        if routineListVM.days[key] != nil {
-                            Block(value: routineListVM.days[key]!.completion)
-                        } else {
-                            Block(value: 0)
-                        }
-                    }
-                    
+                    Block(value: vm.counts[day] ?? 0)
                 }
             }
         }
@@ -87,7 +81,7 @@ struct CalendarView: View {
 
 struct CalendarView_Previews: PreviewProvider {
     static var previews: some View {
-        CalendarView(year: 2023, month: 3)
-            .environmentObject(ViewModel(context: PersistenceController.preview.container.viewContext))
+        CalendarView(year: 2023, month: 4)
+            .environmentObject(GraphViewModel(context: PersistenceController.preview.container.viewContext))
     }
 }

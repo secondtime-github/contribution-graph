@@ -15,7 +15,6 @@ struct ContributionGraphApp: App {
     var body: some Scene {
         WindowGroup {
             MenuView()
-                .environmentObject(ViewModel(context: viewContext))
                 .environment(\.managedObjectContext, viewContext)
         }
     }
