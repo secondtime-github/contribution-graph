@@ -13,6 +13,7 @@
 		BF78C2D529D34C6600DEF4EE /* PrintDaysView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF78C2D429D34C6600DEF4EE /* PrintDaysView.swift */; };
 		BF78C2D729D3E74200DEF4EE /* TodayViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF78C2D629D3E74200DEF4EE /* TodayViewModel.swift */; };
 		BF78C2D929D3E76700DEF4EE /* GraphViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF78C2D829D3E76700DEF4EE /* GraphViewModel.swift */; };
+		BF78C2DE29D6080900DEF4EE /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF78C2DD29D6080900DEF4EE /* TodayView.swift */; };
 		BFABB7AF29C5DD18003F3227 /* CreateNewItemView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFABB7AE29C5DD18003F3227 /* CreateNewItemView.swift */; };
 		BFD5A1A229B1D93200FEA346 /* ContributionGraphApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD5A1A129B1D93200FEA346 /* ContributionGraphApp.swift */; };
 		BFD5A1A429B1D93200FEA346 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD5A1A329B1D93200FEA346 /* ContentView.swift */; };
@@ -23,8 +24,7 @@
 		BFD5A1B429B23D0300FEA346 /* MenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD5A1B329B23D0300FEA346 /* MenuView.swift */; };
 		BFD5A1B629B23D9500FEA346 /* GraphView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD5A1B529B23D9500FEA346 /* GraphView.swift */; };
 		BFD5A1BB29B2465100FEA346 /* Block.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD5A1BA29B2465100FEA346 /* Block.swift */; };
-		BFD5A1BD29B24F6500FEA346 /* OneDay.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD5A1BC29B24F6500FEA346 /* OneDay.swift */; };
-		BFD5A1BF29B5808600FEA346 /* TodayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD5A1BE29B5808600FEA346 /* TodayView.swift */; };
+		BFD5A1BD29B24F6500FEA346 /* Routine.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD5A1BC29B24F6500FEA346 /* Routine.swift */; };
 		BFD5A1E129B5AC3900FEA346 /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = BFD5A1E029B5AC3800FEA346 /* Persistence.swift */; };
 		BFD5A1E529B5ACCB00FEA346 /* ContributionGraph.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BFD5A1E329B5ACCB00FEA346 /* ContributionGraph.xcdatamodeld */; };
 /* End PBXBuildFile section */
@@ -36,6 +36,7 @@
 		BF78C2D429D34C6600DEF4EE /* PrintDaysView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrintDaysView.swift; sourceTree = "<group>"; };
 		BF78C2D629D3E74200DEF4EE /* TodayViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayViewModel.swift; sourceTree = "<group>"; };
 		BF78C2D829D3E76700DEF4EE /* GraphViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphViewModel.swift; sourceTree = "<group>"; };
+		BF78C2DD29D6080900DEF4EE /* TodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayView.swift; sourceTree = "<group>"; };
 		BFABB7AE29C5DD18003F3227 /* CreateNewItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewItemView.swift; sourceTree = "<group>"; };
 		BFD5A19E29B1D93200FEA346 /* ContributionGraph.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ContributionGraph.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFD5A1A129B1D93200FEA346 /* ContributionGraphApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributionGraphApp.swift; sourceTree = "<group>"; };
@@ -47,8 +48,7 @@
 		BFD5A1B329B23D0300FEA346 /* MenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuView.swift; sourceTree = "<group>"; };
 		BFD5A1B529B23D9500FEA346 /* GraphView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphView.swift; sourceTree = "<group>"; };
 		BFD5A1BA29B2465100FEA346 /* Block.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Block.swift; sourceTree = "<group>"; };
-		BFD5A1BC29B24F6500FEA346 /* OneDay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OneDay.swift; sourceTree = "<group>"; };
-		BFD5A1BE29B5808600FEA346 /* TodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayView.swift; sourceTree = "<group>"; };
+		BFD5A1BC29B24F6500FEA346 /* Routine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Routine.swift; sourceTree = "<group>"; };
 		BFD5A1E029B5AC3800FEA346 /* Persistence.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		BFD5A1E429B5ACCB00FEA346 /* ContributionGraph.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = ContributionGraph.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -72,6 +72,15 @@
 				BF78C2D829D3E76700DEF4EE /* GraphViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		BF78C2DC29D6056E00DEF4EE /* ForTest */ = {
+			isa = PBXGroup;
+			children = (
+				BF78C2D429D34C6600DEF4EE /* PrintDaysView.swift */,
+				BF78C2DD29D6080900DEF4EE /* TodayView.swift */,
+			);
+			path = ForTest;
 			sourceTree = "<group>";
 		};
 		BFD5A19529B1D93200FEA346 = {
@@ -120,9 +129,8 @@
 				BFABB7AE29C5DD18003F3227 /* CreateNewItemView.swift */,
 				BFD5A1A329B1D93200FEA346 /* ContentView.swift */,
 				BFD5A1B529B23D9500FEA346 /* GraphView.swift */,
-				BFD5A1BE29B5808600FEA346 /* TodayView.swift */,
-				BF78C2D429D34C6600DEF4EE /* PrintDaysView.swift */,
 				BFD5A1B829B23DC800FEA346 /* Component */,
+				BF78C2DC29D6056E00DEF4EE /* ForTest */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -141,7 +149,7 @@
 			isa = PBXGroup;
 			children = (
 				BFD5A1B129B1E51D00FEA346 /* Category.swift */,
-				BFD5A1BC29B24F6500FEA346 /* OneDay.swift */,
+				BFD5A1BC29B24F6500FEA346 /* Routine.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -229,7 +237,7 @@
 				BFD5A1BB29B2465100FEA346 /* Block.swift in Sources */,
 				BFD5A1A429B1D93200FEA346 /* ContentView.swift in Sources */,
 				BFD5A1A229B1D93200FEA346 /* ContributionGraphApp.swift in Sources */,
-				BFD5A1BF29B5808600FEA346 /* TodayView.swift in Sources */,
+				BF78C2DE29D6080900DEF4EE /* TodayView.swift in Sources */,
 				BF164EC629B635600062C04E /* RoutineListViewModel.swift in Sources */,
 				BF164EC429B632DF0062C04E /* RoutineListView.swift in Sources */,
 				BF78C2D529D34C6600DEF4EE /* PrintDaysView.swift in Sources */,
@@ -241,7 +249,7 @@
 				BF78C2D729D3E74200DEF4EE /* TodayViewModel.swift in Sources */,
 				BFD5A1B629B23D9500FEA346 /* GraphView.swift in Sources */,
 				BFABB7AF29C5DD18003F3227 /* CreateNewItemView.swift in Sources */,
-				BFD5A1BD29B24F6500FEA346 /* OneDay.swift in Sources */,
+				BFD5A1BD29B24F6500FEA346 /* Routine.swift in Sources */,
 				BFD5A1E129B5AC3900FEA346 /* Persistence.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

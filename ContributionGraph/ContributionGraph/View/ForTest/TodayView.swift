@@ -6,41 +6,17 @@
 //
 
 import SwiftUI
-import CoreData
 
 struct TodayView: View {
     
     @State private var currentDate = Date()
     
-    @Environment(\.managedObjectContext) private var viewContext
-    
-    @State var diaries: Date?
-    
-    func fetchDiaries(forDate date: Date) {
-//        let calendar = Calendar.current
-//        let startDate = calendar.startOfDay(for: date)
-//        let endDate = calendar.date(byAdding: .day, value: 1, to: startDate)!
-//
-//        let predicate = NSPredicate(format: "date >= %@ AND date < %@", startDate as NSDate, endDate as NSDate)
-//        let fetchRequest: NSFetchRequest<DiaryEntity> = DiaryEntity.fetchRequest()
-//        fetchRequest.predicate = predicate
-//
-//        do {
-//            let diaries = try self.viewContext.fetch(fetchRequest)
-//            self.diaries = diaries.first?.date
-//        } catch let error as NSError {
-//            print("Failed to fetch diaries: \(error.localizedDescription)")
-//        }
-    }
-
-    
     var body: some View {
         NavigationStack {
             VStack {
                 
-                Text(getContent(for: diaries ?? Date()))
+                Text(getContent(for: currentDate))
                 
-                //ContentView()
             }
             .navigationTitle(
                 Text(dateFormatter.string(from: currentDate))
@@ -51,7 +27,6 @@ struct TodayView: View {
                 leading:
                     Button(action: {
                         currentDate = Calendar.current.date(byAdding: .day, value: -1, to: currentDate)!
-                        fetchDiaries(forDate: currentDate)
                     }) {
                         Image(systemName: "arrow.left")
                     },
@@ -59,13 +34,11 @@ struct TodayView: View {
                     HStack {
                         Button(action: {
                             currentDate = Date()
-                            fetchDiaries(forDate: currentDate)
                         }) {
                             Text("Today")
                         }
                         Button(action: {
                             currentDate = Calendar.current.date(byAdding: .day, value: 1, to: currentDate)!
-                            fetchDiaries(forDate: currentDate)
                         }) {
                             Image(systemName: "arrow.right")
                         }
@@ -89,10 +62,5 @@ struct TodayView: View {
 struct TodayView_Previews: PreviewProvider {
     static var previews: some View {
         TodayView()
-            .environment(
-                \.managedObjectContext,
-                 PersistenceController.preview.container.viewContext
-            )
-            .environmentObject(RoutineListViewModel(context: PersistenceController.preview.container.viewContext))
     }
 }
