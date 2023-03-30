@@ -25,7 +25,7 @@ struct PersistenceController {
             task1.isDone = false
             task1.year = Int16(2023)
             task1.month = Int16(3)
-            task1.day = Int16(29)
+            task1.day = Int16(31)
             task1.category = routine
             
             let task2 = TaskEntity(context: viewContext)

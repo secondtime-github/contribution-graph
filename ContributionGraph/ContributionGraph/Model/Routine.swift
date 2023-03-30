@@ -1,48 +1,11 @@
 //
-//  OneDay.swift
+//  Routine.swift
 //  ContributionGraph
 //
 //  Created by TEKI HOU on 2023-03-04.
 //
 
 import Foundation
-
-// MARK: - Date
-
-struct OneDay {
-    var date: Date
-    var tasks: [Routine : Task]
-    
-    var completion: Int {
-        tasks.filter { $0.value.isDone } .count
-    }
-
-    init(in dateString: String) {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        
-        self.date = dateFormatter.date(from: dateString)!
-        self.tasks = [Routine : Task]()
-    }
-}
-
-
-
-// MARK: - Task
-
-struct Task {
-    var isDone: Bool
-}
-
-extension TaskEntity {
-    func toTask() -> Task {
-        Task(isDone: self.isDone)
-    }
-}
-
-
-
-// MARK: - Routine
 
 struct Routine: Hashable {
     

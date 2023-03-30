@@ -13,6 +13,7 @@ struct ContentView: View {
     
     @FetchRequest(
         sortDescriptors: [NSSortDescriptor(keyPath: \RoutineEntity.name, ascending: true)],
+        predicate: NSPredicate(format: "isArchived == false"),
         animation: .default
     )
     private var routineEntities: FetchedResults<RoutineEntity>
@@ -104,7 +105,9 @@ struct ContentView: View {
                 }
             }
         }
-        
+        .onAppear {
+            vm.fetchTasks()
+        }
     }
 }
 

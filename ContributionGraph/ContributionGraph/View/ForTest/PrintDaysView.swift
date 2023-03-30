@@ -22,6 +22,9 @@ struct PrintDaysView: View {
                 Text((vm.tasks[routine] ?? false) ? "Yes" : "No")
             }
         }
+        .onAppear {
+            vm.fetchTasks()
+        }
     }
 }
 

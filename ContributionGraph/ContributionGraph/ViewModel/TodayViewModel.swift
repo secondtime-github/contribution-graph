@@ -35,7 +35,7 @@ class TodayViewModel: ObservableObject {
         
         let request: NSFetchRequest<TaskEntity> = TaskEntity.fetchRequest()
         
-        let predicate = NSPredicate(format: "year == %d AND month == %d AND day == %d", year, month, day)
+        let predicate = NSPredicate(format: "year == %d AND month == %d AND day == %d AND category.isArchived == false", year, month, day)
         request.predicate = predicate
         
         let keyPath = #keyPath(TaskEntity.category.name)
