@@ -14,16 +14,16 @@ struct CreateNewItemView: View {
     @Binding var isShown: Bool
     @Binding var selectedRoutineEntity: RoutineEntity?
     
-    let emojis = ["😀", "😆", "😂", "🤣", "😊",
-                  "😘", "😛", "😜", "🤪", "😝",
-                  "🐶", "🐱", "🦁", "🐯", "🐷",
-                  "🐙", "🐚", "🍔", "🍕", "🍟",
-                  "🍿", "🍩", "🍪", "🎂", "🍰",
-                  "🍭", "🍬", "🍮", "🥛", "🍺",
-                  "🍹", "🍸", "🍾", "🥤", "🍼"]
+    let emojis = ["🔴", "📖", "📒", "✏️", "💻",
+                  "💼", "👩‍💻", "💰", "📈", "💳",
+                  "🍎", "🥦", "🥗", "💊", "💤",
+                  "💦", "🏊", "🏋️", "🧘‍♀️", "🚿",
+                  "💬", "☎️", "💓", "🐱", "🐶",
+                  "🎮", "🎹", "🎬", "🎨", "📷",
+                  "✉️", "🔧", "✈️", "🎵", "❤️"]
     
     @State private var name = ""
-    @State private var selectedIcon = "😀"
+    @State private var selectedIcon = "🔴"
     @State private var selectedCategory: Category = .study
     @State private var description = ""
     
@@ -45,7 +45,9 @@ struct CreateNewItemView: View {
                             }) {
                                 Text(emoji)
                                     .padding(5)
-                                    .background(selectedIcon == emoji ? .blue : .gray)
+                                    .background(selectedIcon == emoji
+                                                ? Color.accentColor
+                                                : .gray.opacity(0.5))
                                     .cornerRadius(5)
                             }
                             .buttonStyle(.plain)

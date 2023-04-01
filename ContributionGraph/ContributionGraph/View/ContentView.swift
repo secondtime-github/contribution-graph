@@ -17,22 +17,17 @@ struct ContentView: View {
     )
     private var routineEntities: FetchedResults<RoutineEntity>
     
-    let statusList = ["All", "Completed", "Not Completed"]
-    @State var currentStatus = "All"
+    @State var currentCategory: Category? = nil
     
     var filteredRoutines: [Routine] {
-        let allRoutines: [Routine] = routineEntities.map { Routine(entity: $0) }
-        let completedRoutines: [Routine] = vm.tasks.filter { $0.value } .map { $0.key }
-
-        switch currentStatus {
-        case "All":
-            return allRoutines
-        case "Completed":
-            return completedRoutines
-        default:
-            let diff = Set(allRoutines).subtracting(Set(completedRoutines))
-            return Array(diff)
-        }
+        return routineEntities
+            .map { Routine(entity: $0) }
+            .filter { routine in
+                if let currentCategory = currentCategory {
+                    return routine.category == currentCategory
+                }
+                return true
+            }
     }
     
     var formattedCurrentDate: String {
@@ -68,19 +63,15 @@ struct ContentView: View {
             
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack {
-                    ForEach(statusList, id: \.self) { status in
-                        Button(action: {
-                            currentStatus = status
-                        }) {
-                            Text(status)
-                                .foregroundColor(.primary)
-                                .padding()
-                                .frame(minWidth: 120)
-                                .background(.green.opacity(
-                                    currentStatus == status ? 1 : 0.5)
-                                )
-                                .cornerRadius(16)
-                        }
+                    CategoryButton(
+                        currentCategory: $currentCategory,
+                        category: nil
+                    )
+                    ForEach(Category.allCases) { category in
+                        CategoryButton(
+                            currentCategory: $currentCategory,
+                            category: category
+                        )
                     }
                 }
             }
@@ -118,5 +109,22 @@ struct ContentView_Previews: PreviewProvider {
                 \.managedObjectContext,
                  PersistenceController.preview.container.viewContext
             )
+    }
+}
+
+struct CategoryButton: View {
+    @Binding var currentCategory: Category?
+    let category: Category?
+    
+    var body: some View {
+        Button(action: {
+            currentCategory = category
+        }) {
+            Text(category?.icon ?? "😊")
+                .padding()
+                .background(Circle().fill(.green.opacity(
+                    currentCategory == category ? 1 : 0.5)
+                ))
+        }
     }
 }

@@ -17,4 +17,17 @@ enum Category: String, CaseIterable, Identifiable {
     case relationships = "Relationships"
     case entertainment = "Entertainment"
     case hobbies = "Hobbies"
+    
+    var icon: String {
+        switch self {
+        case .study: return "🎓"
+        case .work: return "💼"
+        case .finance: return "💰"
+        case .health: return "❤️"
+        case .relationships: return "👥"
+        case .entertainment: return "🎯"
+        case .hobbies: return "🎨"
+        }
+    }
+    
 }
