@@ -11,8 +11,10 @@ struct MenuView: View {
     
     @Environment(\.managedObjectContext) private var viewContext
     
+    @State var selection = 1
+    
     var body: some View {
-        TabView {
+        TabView(selection: $selection) {
             RoutineListView()
                 .environmentObject(RoutineListViewModel(context: viewContext))
                 .tabItem {

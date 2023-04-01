@@ -16,9 +16,9 @@ struct PersistenceController {
         for i in 0..<5 {
             let routine = RoutineEntity(context: viewContext)
             routine.name = "AAA\(i)"
-            routine.icon = "🍸"
+            routine.icon = "🔴"
             routine.category = "Finance"
-            routine.content = "description"
+            routine.content = "description\(i)"
             routine.isArchived = false
             
             let task1 = TaskEntity(context: viewContext)
