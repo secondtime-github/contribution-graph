@@ -15,15 +15,29 @@ struct PrintDaysView: View {
         vm.tasks.map { $0.key }
     }
     
+    @State var isShown = false
+    
     var body: some View {
-        List {
-            ForEach(routines, id: \.self) { routine in
-                Text(routine.name)
-                Text((vm.tasks[routine] ?? false) ? "Yes" : "No")
+        NavigationStack {
+            List {
+                ForEach(routines, id: \.self) { routine in
+                    Text(routine.name)
+                    Text((vm.tasks[routine] ?? false) ? "Yes" : "No")
+                }
+                
             }
-        }
-        .onAppear {
-            vm.fetchTasks()
+            .onAppear {
+                vm.fetchTasks()
+            }
+            .sheet(isPresented: $isShown) {
+                Text("aaa")
+            }
+            .navigationBarTitleDisplayMode(.large)
+            .toolbar(content: {
+                Button(action: {isShown.toggle()}, label: {
+                    Text("On")
+                })
+            })
         }
     }
 }

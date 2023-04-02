@@ -14,7 +14,7 @@ struct ContributionGraphApp: App {
     
     var body: some Scene {
         WindowGroup {
-            MenuView()
+            WelcomeView()
                 .environment(\.managedObjectContext, viewContext)
         }
     }

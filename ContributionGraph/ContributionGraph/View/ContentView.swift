@@ -46,15 +46,18 @@ struct ContentView: View {
                 Button(action: {
                     vm.currentDate = Calendar.current.date(byAdding: .day, value: -1, to: vm.currentDate)!
                 }) {
-                    Image(systemName: "arrow.left")
+                    Image(systemName: "arrow.left").bold()
                 }
                 
                 Text(formattedCurrentDate)
+                    .fontWeight(.heavy)
+                    .font(.system(size: 28))
+                    .padding(.horizontal)
                 
                 Button(action: {
                     vm.currentDate = Calendar.current.date(byAdding: .day, value: 1, to: vm.currentDate)!
                 }) {
-                    Image(systemName: "arrow.right")
+                    Image(systemName: "arrow.right").bold()
                 }
             }
             

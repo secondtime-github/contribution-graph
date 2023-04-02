@@ -18,11 +18,11 @@ struct RoutineListView: View {
     )
     private var routineEntities: FetchedResults<RoutineEntity>
     
-    @State var isShown = false
+    @State private var isShown = false
     @State var selectedRoutineEntity: RoutineEntity? = nil
     
     var body: some View {
-        NavigationStack {
+        NavigationView {
             List {
                 Section{
                     ForEach(routineEntities.filter { !$0.isArchived } ) { routineEntity in
@@ -85,6 +85,7 @@ struct RoutineListView: View {
                 
             }
             .navigationTitle(Text("Routine List"))
+            .navigationBarTitleDisplayMode(.large)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: addItem) {
@@ -100,7 +101,7 @@ struct RoutineListView: View {
         }
     }
     
-    func addItem() -> Void {
+    func addItem() {
         selectedRoutineEntity = nil
         isShown.toggle()
     }

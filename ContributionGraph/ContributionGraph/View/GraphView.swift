@@ -9,6 +9,8 @@ import SwiftUI
 
 struct GraphView: View {
     
+    @Environment(\.presentationMode) var presentation
+    
     @EnvironmentObject var vm: GraphViewModel
     
     let dateFormatter: DateFormatter = {
@@ -17,31 +19,60 @@ struct GraphView: View {
         return formatter
     }()
     
+    @State private var isShown = false
+    
     var body: some View {
-        VStack {
-            HStack {
-                Button(action: {
-                    vm.currentDate = Calendar.current.date(byAdding: .month, value: -1, to: vm.currentDate)!
-                }) {
-                    Image(systemName: "arrow.left")
+        NavigationView {
+            VStack {
+                HStack {
+                    Button(action: {
+                        vm.currentDate = Calendar.current.date(byAdding: .month, value: -1, to: vm.currentDate)!
+                    }) {
+                        Image(systemName: "arrow.left").bold()
+                    }
+                    
+                    Text(dateFormatter.string(from: vm.currentDate))
+                        .fontWeight(.heavy)
+                        .font(.system(size: 28))
+                        .padding(.horizontal)
+                    
+                    Button(action: {
+                        vm.currentDate = Calendar.current.date(byAdding: .month, value: 1, to: vm.currentDate)!
+                    }) {
+                        Image(systemName: "arrow.right").bold()
+                    }
                 }
                 
-                Text(dateFormatter.string(from: vm.currentDate))
+                CalendarView(year: Calendar.current.component(.year, from: vm.currentDate),
+                             month: Calendar.current.component(.month, from: vm.currentDate))
+                
+                Spacer()
                 
                 Button(action: {
-                    vm.currentDate = Calendar.current.date(byAdding: .month, value: 1, to: vm.currentDate)!
+                    UserDefaults.standard.set(false, forKey: "kIsLoggedIn")
+                    self.presentation.wrappedValue.dismiss()
                 }) {
-                    Image(systemName: "arrow.right")
+                    Text("Log out")
+                        .foregroundColor(.white)
+                        .padding()
+                        .background(
+                            RoundedRectangle(cornerRadius: 16)
+                                .fill().opacity(0.8))
+                }.padding()
+                
+            }
+            .navigationBarTitleDisplayMode(.large)// 必须设置为large才能保证sheet正常弹出
+            .toolbar {
+                Button(action: { isShown.toggle() }) {
+                    Image(systemName: "gearshape")
                 }
             }
-            
-            CalendarView(year: Calendar.current.component(.year, from: vm.currentDate),
-                         month: Calendar.current.component(.month, from: vm.currentDate))
-            
-            Spacer()
-        }
-        .onAppear {
-            vm.fetchCounts()
+            .sheet(isPresented: $isShown) {
+                SettingView()
+            }
+            .onAppear {
+                vm.fetchCounts()
+            }
         }
     }
 }

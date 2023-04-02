@@ -39,6 +39,7 @@ struct MenuView: View {
                 }
                 .tag(2)
         }
+        .navigationBarBackButtonHidden(true)
     }
 }
 
