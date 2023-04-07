@@ -1,0 +1,36 @@
+/* 
+  Localizable.strings
+  ContributionGraph
+
+  Created by TEKI HOU on 2023-04-08.
+  
+*/
+
+"plan" = "計画";
+"do" = "実行";
+"check" = "確認";
+
+"go" = "スタート";
+
+"routine_list" = "習慣リスト";
+"archived" = "アーカイブ";
+
+"new_item" = "新しいアイテム";
+"save" = "保存";
+"cancel" = "キャンセル";
+"name" = "名前";
+"icon" = "アイコン";
+"category" = "カテゴリ";
+"description" = "備考";
+"study" = "勉強";
+"work" = "仕事";
+"finance" = "財務";
+"health" = "健康";
+"relationships" = "人間関係";
+"entertainment" = "エンターテインメント";
+"hobbies" = "趣味";
+
+"never_give_up" = "決して諦めない！";
+
+"setting" = "設定";
+"log_out" = "ログアウト";

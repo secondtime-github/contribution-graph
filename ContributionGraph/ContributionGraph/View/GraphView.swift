@@ -48,18 +48,6 @@ struct GraphView: View {
                 
                 Spacer()
                 
-                Button(action: {
-                    UserDefaults.standard.set(false, forKey: "kIsLoggedIn")
-                    self.presentation.wrappedValue.dismiss()
-                }) {
-                    Text("Log out")
-                        .foregroundColor(.white)
-                        .padding()
-                        .background(
-                            RoundedRectangle(cornerRadius: 16)
-                                .fill().opacity(0.8))
-                }.padding()
-                
             }
             .navigationBarTitleDisplayMode(.large)// 必须设置为large才能保证sheet正常弹出
             .toolbar {
@@ -68,12 +56,20 @@ struct GraphView: View {
                 }
             }
             .sheet(isPresented: $isShown) {
-                SettingView()
+                SettingView {
+                    logout()
+                }
             }
             .onAppear {
                 vm.fetchCounts()
             }
         }
+    }
+    
+    func logout() {
+        isShown.toggle()
+        UserDefaults.standard.set(false, forKey: "kIsLoggedIn")
+        self.presentation.wrappedValue.dismiss()
     }
 }
 

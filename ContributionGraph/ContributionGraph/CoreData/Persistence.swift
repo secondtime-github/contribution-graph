@@ -17,7 +17,7 @@ struct PersistenceController {
             let routine = RoutineEntity(context: viewContext)
             routine.name = "AAA\(i)"
             routine.icon = "🔴"
-            routine.category = "Finance"
+            routine.category = "finance"
             routine.content = "description\(i)"
             routine.isArchived = false
             

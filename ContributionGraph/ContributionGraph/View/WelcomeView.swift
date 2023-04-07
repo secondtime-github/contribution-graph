@@ -18,11 +18,11 @@ struct WelcomeView: View {
         NavigationStack {
             VStack {
                 TabView(selection: $selectedTab) {
-                    Slide(color: .blue, tilte: "Plan")
+                    Slide(color: .blue, tilte: planStr)
                         .tag(0)
-                    Slide(color: .green, tilte: "Do")
+                    Slide(color: .green, tilte: doStr)
                         .tag(1)
-                    Slide(color: .purple, tilte: "Check")
+                    Slide(color: .purple, tilte: checkStr)
                         .tag(2)
                 }
                 .tabViewStyle(.page(indexDisplayMode: .always))
@@ -35,7 +35,7 @@ struct WelcomeView: View {
                     isLoggedIn = true
                     
                 }) {
-                    Text("Go")
+                    Text(goStr)
                         .foregroundColor(.white)
                         .fontWeight(.heavy)
                         .padding()
