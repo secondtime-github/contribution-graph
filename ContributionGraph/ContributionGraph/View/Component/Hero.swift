@@ -17,7 +17,7 @@ struct Hero: View {
             Image(systemName: "hand.thumbsup.fill")
                 .imageScale(.large)
                 .foregroundColor(.accentColor)
-            Text("Keep going and never give up!")
+            Text(neverGiveUpStr)
                 .font(.title)
             HStack {
                 Spacer()

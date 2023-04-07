@@ -1,0 +1,36 @@
+/* 
+  Localizable.strings
+  ContributionGraph
+
+  Created by TEKI HOU on 2023-04-08.
+  
+*/
+
+"plan" = "計畫";
+"do" = "執行";
+"check" = "檢查";
+
+"go" = "開始";
+
+"routine_list" = "習慣清單";
+"archived" = "已存檔";
+
+"new_item" = "新項目";
+"save" = "保存";
+"cancel" = "取消";
+"name" = "名稱";
+"icon" = "圖標";
+"category" = "類型";
+"description" = "備註";
+"study" = "學習";
+"work" = "工作";
+"finance" = "理財";
+"health" = "健康";
+"relationships" = "社交";
+"entertainment" = "娛樂";
+"hobbies" = "愛好";
+
+"never_give_up" = "永不言棄！";
+
+"setting" = "設置";
+"log_out" = "登出";

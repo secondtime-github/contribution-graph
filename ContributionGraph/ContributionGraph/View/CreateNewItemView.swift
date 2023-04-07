@@ -30,14 +30,14 @@ struct CreateNewItemView: View {
     var body: some View {
         NavigationView {
             Form {
-                Section("Name") {
+                Section(nameStr) {
                     TextField("", text: $name)
                         .onReceive(name.publisher.collect()) {
                             self.name = String($0.prefix(20))
                         }
                 }
                 
-                Section("Icon") {
+                Section(iconStr) {
                     LazyVGrid(columns: Array(repeating: GridItem(), count: 7)) {
                         ForEach(emojis, id: \.self) { emoji in
                             Button(action: {
@@ -55,17 +55,17 @@ struct CreateNewItemView: View {
                     }
                 }
                 
-                Section("Category") {
+                Section(categoryStr) {
                     Picker("", selection: $selectedCategory) {
                         ForEach(Category.allCases, id: \.self) { category in
-                            Text(category.rawValue)
+                            Text(NSLocalizedString(category.rawValue, comment: ""))
                         }
                     }
                     .pickerStyle(.wheel)
                     .frame(maxHeight: 150)
                 }
                 
-                Section("Description") {
+                Section(descriptionStr) {
                     TextEditor(text: $description)
                         .frame(minHeight: 100)
                         .onReceive(description.publisher.collect()) {
@@ -73,19 +73,19 @@ struct CreateNewItemView: View {
                         }
                 }
             }
-            .navigationTitle(selectedRoutineEntity?.name ?? "New Item")
+            .navigationTitle(selectedRoutineEntity?.name ?? newItemStr)
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {
                     Button(action: updateRoutine) {
-                        Text("Save")
+                        Text(saveStr)
                     }
                 }
                 ToolbarItem(placement: .navigationBarLeading) {
                     Button(action: {
                         isShown.toggle()
                     }) {
-                        Text("Cancel")
+                        Text(cancelStr)
                     }
                 }
             }

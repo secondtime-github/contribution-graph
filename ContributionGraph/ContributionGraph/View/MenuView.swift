@@ -19,7 +19,7 @@ struct MenuView: View {
                 .environmentObject(RoutineListViewModel(context: viewContext))
                 .tabItem {
                     Image(systemName: "list.clipboard")
-                    Text("List")
+                    Text(planStr.uppercased())
                 }
                 .tag(0)
             
@@ -27,7 +27,7 @@ struct MenuView: View {
                 .environmentObject(TodayViewModel(context: viewContext))
                 .tabItem {
                     Image(systemName: "flag.checkered")
-                    Text("Today")
+                    Text(doStr.uppercased())
                 }
                 .tag(1)
             
@@ -35,7 +35,7 @@ struct MenuView: View {
                 .environmentObject(GraphViewModel(context: viewContext))
                 .tabItem {
                     Image(systemName: "calendar")
-                    Text("Contribution")
+                    Text(checkStr.uppercased())
                 }
                 .tag(2)
         }

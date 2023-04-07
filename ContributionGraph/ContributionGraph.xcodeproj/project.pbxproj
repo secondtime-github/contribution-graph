@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		BF04450329D97222004A4280 /* SettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF04450229D97222004A4280 /* SettingView.swift */; };
 		BF04450529D97912004A4280 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF04450429D97912004A4280 /* WelcomeView.swift */; };
+		BF12E7A029E067A300076F1F /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF12E79F29E067A300076F1F /* Constants.swift */; };
+		BF12E7AD29E06FFF00076F1F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = BF12E7AF29E06FFF00076F1F /* Localizable.strings */; };
 		BF164EC429B632DF0062C04E /* RoutineListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF164EC329B632DF0062C04E /* RoutineListView.swift */; };
 		BF164EC629B635600062C04E /* RoutineListViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF164EC529B635600062C04E /* RoutineListViewModel.swift */; };
 		BF164EC929B8C50B0062C04E /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BF164EC829B8C50B0062C04E /* CalendarView.swift */; };
@@ -34,6 +36,8 @@
 /* Begin PBXFileReference section */
 		BF04450229D97222004A4280 /* SettingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingView.swift; sourceTree = "<group>"; };
 		BF04450429D97912004A4280 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
+		BF12E79F29E067A300076F1F /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		BF12E7AE29E06FFF00076F1F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		BF164EC329B632DF0062C04E /* RoutineListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineListView.swift; sourceTree = "<group>"; };
 		BF164EC529B635600062C04E /* RoutineListViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutineListViewModel.swift; sourceTree = "<group>"; };
 		BF164EC829B8C50B0062C04E /* CalendarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
@@ -42,6 +46,9 @@
 		BF78C2D829D3E76700DEF4EE /* GraphViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GraphViewModel.swift; sourceTree = "<group>"; };
 		BF78C2DD29D6080900DEF4EE /* TodayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayView.swift; sourceTree = "<group>"; };
 		BFABB7AE29C5DD18003F3227 /* CreateNewItemView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewItemView.swift; sourceTree = "<group>"; };
+		BFBAAD1929E073C000123D0D /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		BFBAAD1A29E073C600123D0D /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		BFBAAD1B29E073C700123D0D /* ja */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ja; path = ja.lproj/Localizable.strings; sourceTree = "<group>"; };
 		BFD5A19E29B1D93200FEA346 /* ContributionGraph.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ContributionGraph.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BFD5A1A129B1D93200FEA346 /* ContributionGraphApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContributionGraphApp.swift; sourceTree = "<group>"; };
 		BFD5A1A329B1D93200FEA346 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -68,6 +75,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		BF12E79529E060EF00076F1F /* Localization */ = {
+			isa = PBXGroup;
+			children = (
+				BF12E79F29E067A300076F1F /* Constants.swift */,
+				BF12E7AF29E06FFF00076F1F /* Localizable.strings */,
+			);
+			path = Localization;
+			sourceTree = "<group>";
+		};
 		BF164EC729B635670062C04E /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -111,6 +127,7 @@
 				BFD5A1B929B23DDE00FEA346 /* Model */,
 				BF164EC729B635670062C04E /* ViewModel */,
 				BFD5A1B729B23D9E00FEA346 /* View */,
+				BF12E79529E060EF00076F1F /* Localization */,
 				BFD5A1A529B1D93300FEA346 /* Assets.xcassets */,
 				BFD5A1A729B1D93300FEA346 /* Preview Content */,
 			);
@@ -210,6 +227,9 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				"zh-Hans",
+				"zh-Hant",
+				ja,
 				Base,
 			);
 			mainGroup = BFD5A19529B1D93200FEA346;
@@ -227,6 +247,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BF12E7AD29E06FFF00076F1F /* Localizable.strings in Resources */,
 				BFD5A1A929B1D93300FEA346 /* Preview Assets.xcassets in Resources */,
 				BFD5A1A629B1D93300FEA346 /* Assets.xcassets in Resources */,
 			);
@@ -250,6 +271,7 @@
 				BFD5A1B029B1E1BA00FEA346 /* Hero.swift in Sources */,
 				BF164EC929B8C50B0062C04E /* CalendarView.swift in Sources */,
 				BF04450329D97222004A4280 /* SettingView.swift in Sources */,
+				BF12E7A029E067A300076F1F /* Constants.swift in Sources */,
 				BFD5A1B229B1E51D00FEA346 /* Category.swift in Sources */,
 				BF78C2D929D3E76700DEF4EE /* GraphViewModel.swift in Sources */,
 				BFD5A1E529B5ACCB00FEA346 /* ContributionGraph.xcdatamodeld in Sources */,
@@ -263,6 +285,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		BF12E7AF29E06FFF00076F1F /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				BF12E7AE29E06FFF00076F1F /* en */,
+				BFBAAD1929E073C000123D0D /* zh-Hans */,
+				BFBAAD1A29E073C600123D0D /* zh-Hant */,
+				BFBAAD1B29E073C700123D0D /* ja */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		BFD5A1AA29B1D93300FEA346 /* Debug */ = {

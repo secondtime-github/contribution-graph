@@ -9,19 +9,15 @@ import SwiftUI
 
 struct SettingView: View {
     
-    @Environment(\.presentationMode) var presentation
+    let logout: () -> Void
     
     var body: some View {
         VStack {
-            Text("Setting")
+            Text(settingStr)
                 .font(.system(.title))
             
-            Button(action: {
-                UserDefaults.standard.set(false, forKey: "kIsLoggedIn")
-                
-                self.presentation.wrappedValue.dismiss()
-            }) {
-                Text("Log out")
+            Button(action: logout) {
+                Text(logOutStr)
                     .foregroundColor(.white)
                     .padding()
                     .background(
@@ -34,6 +30,6 @@ struct SettingView: View {
 
 struct SettingView_Previews: PreviewProvider {
     static var previews: some View {
-        SettingView()
+        SettingView(logout: {})
     }
 }

@@ -54,7 +54,7 @@ struct RoutineListView: View {
                 }
                 .fontWeight(.bold)
                 
-                Section("Archived") {
+                Section(archivedStr) {
                     ForEach(routineEntities.filter { $0.isArchived } ) { routineEntity in
                         HStack {
                             Text(routineEntity.icon!)
@@ -84,7 +84,7 @@ struct RoutineListView: View {
                 .foregroundColor(.gray)
                 
             }
-            .navigationTitle(Text("Routine List"))
+            .navigationTitle(Text(routineListStr))
             .navigationBarTitleDisplayMode(.large)
             .toolbar {
                 ToolbarItem(placement: .navigationBarTrailing) {

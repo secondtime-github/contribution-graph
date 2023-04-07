@@ -10,13 +10,13 @@ import Foundation
 enum Category: String, CaseIterable, Identifiable {
     var id: String { self.rawValue }
     
-    case study = "Study"
-    case work = "Work"
-    case finance = "Finance"
-    case health = "Health"
-    case relationships = "Relationships"
-    case entertainment = "Entertainment"
-    case hobbies = "Hobbies"
+    case study = "study"
+    case work = "work"
+    case finance = "finance"
+    case health = "health"
+    case relationships = "relationships"
+    case entertainment = "entertainment"
+    case hobbies = "hobbies"
     
     var icon: String {
         switch self {
