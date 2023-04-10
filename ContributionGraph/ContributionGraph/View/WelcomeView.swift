@@ -10,6 +10,7 @@ import SwiftUI
 struct WelcomeView: View {
     
     @State private var selectedTab = 0
+    let icons = ["list.clipboard", "flag.checkered", "calendar"]
     
     @State var isLoggedIn = false
     
@@ -29,22 +30,39 @@ struct WelcomeView: View {
                 .indexViewStyle(.page(backgroundDisplayMode: .always))
                 .frame(maxHeight: 550)
                 
-                Button(action: {
-                    
-                    UserDefaults.standard.set(true, forKey: "kIsLoggedIn")
-                    isLoggedIn = true
-                    
-                }) {
+                
+                if selectedTab == 2 {
+                    Button(action: {
+                        UserDefaults.standard.set(true, forKey: "kIsLoggedIn")
+                        isLoggedIn = true
+                        
+                    }) {
+                        Text(goStr)
+                            .foregroundColor(.white)
+                            .fontWeight(.heavy)
+                            .padding()
+                            .background(Capsule(style: .continuous).fill(.green))
+                    }
+                    .navigationDestination(isPresented: $isLoggedIn) {
+                        MenuView()
+                    }
+                } else {
                     Text(goStr)
-                        .foregroundColor(.white)
+                        .foregroundColor(.clear)
                         .fontWeight(.heavy)
                         .padding()
-                        .background(Circle().fill(.green))
-                }
-                .navigationDestination(isPresented: $isLoggedIn) {
-                    MenuView()
+                        .background(Capsule(style: .continuous).fill(.clear))
                 }
             }
+            .background(
+                Image(systemName: icons[selectedTab])
+                    .resizable()
+                    .aspectRatio(contentMode: .fit)
+                    .frame(width: 300, height: 400)
+                    .offset(x: 70, y: -200)
+                    .foregroundColor(.gray.opacity(0.6))
+                    .animation(.easeInOut, value: selectedTab)
+            )
         }
         .onAppear {
             if UserDefaults.standard.bool(forKey: "kIsLoggedIn") {
@@ -67,17 +85,17 @@ struct Slide: View {
     let tilte: String
     
     var body: some View {
-        ZStack {
-            RoundedRectangle(cornerRadius: 20, style: .continuous)
-                .fill(.gray.opacity(0.3))
-            
-            VStack {
-                Text(tilte)
-                    .foregroundColor(color)
-                    .font(.system(size: 50, weight: .bold))
-            }
-            .padding()
+        VStack {
+            Text(tilte)
+                .foregroundColor(color)
+                .font(.system(size: 50, weight: .bold))
         }
         .frame(width: 300, height: 400)
+        .background(
+            .ultraThinMaterial,
+            in: RoundedRectangle(cornerRadius: 20, style: .continuous)
+        )
+        .shadow(color: color.opacity(0.3), radius: 10, x: 0, y: 10)
+        
     }
 }
