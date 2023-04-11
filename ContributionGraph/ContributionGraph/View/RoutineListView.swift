@@ -24,65 +24,8 @@ struct RoutineListView: View {
     var body: some View {
         NavigationView {
             List {
-                Section{
-                    ForEach(routineEntities.filter { !$0.isArchived } ) { routineEntity in
-                        HStack {
-                            Text(routineEntity.icon!)
-                            Text(routineEntity.name!)
-                        }
-                        .swipeActions(
-                            edge: .trailing,
-                            allowsFullSwipe: true) {
-                                HStack {
-                                    Button {
-                                        vm.archive(routineEntity)
-                                    } label: {
-                                        Label("Archive", systemImage: "archivebox")
-                                    }
-                                    .tint(.red)
-                                    
-                                    Button {
-                                        selectedRoutineEntity = routineEntity
-                                        isShown.toggle()
-                                    } label: {
-                                        Label("Edit", systemImage: "pencil")
-                                    }
-                                    .tint(.green)
-                                }
-                            }
-                    }
-                }
-                .fontWeight(.bold)
-                
-                Section(archivedStr) {
-                    ForEach(routineEntities.filter { $0.isArchived } ) { routineEntity in
-                        HStack {
-                            Text(routineEntity.icon!)
-                            Text(routineEntity.name!)
-                        }
-                        .swipeActions(
-                            edge: .trailing,
-                            allowsFullSwipe: true) {
-                                HStack {
-                                    Button {
-                                        vm.delete(routineEntity)
-                                    } label: {
-                                        Label("Delete", systemImage: "trash")
-                                    }
-                                    .tint(.red)
-                                    
-                                    Button {
-                                        vm.archive(routineEntity)
-                                    } label: {
-                                        Label("Back", systemImage: "arrow.uturn.up")
-                                    }
-                                    .tint(.green)
-                                }
-                            }
-                    }
-                }
-                .foregroundColor(.gray)
-                
+                aliveList
+                archivedList
             }
             .navigationTitle(Text(routineListStr))
             .navigationBarTitleDisplayMode(.large)
@@ -99,6 +42,69 @@ struct RoutineListView: View {
                     selectedRoutineEntity: $selectedRoutineEntity)
             }
         }
+    }
+    
+    var aliveList: some View {
+        Section{
+            ForEach(routineEntities.filter { !$0.isArchived } ) { routineEntity in
+                HStack {
+                    Text(routineEntity.icon!)
+                    Text(routineEntity.name!)
+                }
+                .swipeActions(
+                    edge: .trailing,
+                    allowsFullSwipe: true) {
+                        HStack {
+                            Button {
+                                vm.archive(routineEntity)
+                            } label: {
+                                Label("Archive", systemImage: "archivebox")
+                            }
+                            .tint(.red)
+                            
+                            Button {
+                                selectedRoutineEntity = routineEntity
+                                isShown.toggle()
+                            } label: {
+                                Label("Edit", systemImage: "pencil")
+                            }
+                            .tint(.green)
+                        }
+                    }
+            }
+        }
+        .fontWeight(.bold)
+    }
+    
+    var archivedList: some View {
+        Section(archivedStr) {
+            ForEach(routineEntities.filter { $0.isArchived } ) { routineEntity in
+                HStack {
+                    Text(routineEntity.icon!)
+                    Text(routineEntity.name!)
+                }
+                .swipeActions(
+                    edge: .trailing,
+                    allowsFullSwipe: true) {
+                        HStack {
+                            Button {
+                                vm.delete(routineEntity)
+                            } label: {
+                                Label("Delete", systemImage: "trash")
+                            }
+                            .tint(.red)
+                            
+                            Button {
+                                vm.archive(routineEntity)
+                            } label: {
+                                Label("Back", systemImage: "arrow.uturn.up")
+                            }
+                            .tint(.green)
+                        }
+                    }
+            }
+        }
+        .foregroundColor(.gray)
     }
     
     func addItem() {

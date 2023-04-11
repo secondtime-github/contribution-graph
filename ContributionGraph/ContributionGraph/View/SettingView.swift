@@ -12,18 +12,20 @@ struct SettingView: View {
     let logout: () -> Void
     
     var body: some View {
-        VStack {
-            Text(settingStr)
-                .font(.system(.title))
-            
-            Button(action: logout) {
-                Text(logOutStr)
-                    .foregroundColor(.white)
-                    .padding()
-                    .background(
-                        RoundedRectangle(cornerRadius: 16)
-                            .fill().opacity(0.8))
+        NavigationView {
+            List {
+                Section {
+                    Link(destination: URL(string: "https://apple.com")!) {
+                        Label("Website", systemImage: "link")
+                    }
+                }
+                
+                Button(action: logout) {
+                    Label(logOutStr, systemImage: "xmark.square")
+                }
             }
+            .foregroundColor(.primary)
+            .navigationTitle(settingStr)
         }
     }
 }

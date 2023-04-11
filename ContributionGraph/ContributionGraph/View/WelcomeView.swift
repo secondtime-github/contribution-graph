@@ -30,28 +30,22 @@ struct WelcomeView: View {
                 .indexViewStyle(.page(backgroundDisplayMode: .always))
                 .frame(maxHeight: 550)
                 
-                
-                if selectedTab == 2 {
-                    Button(action: {
-                        UserDefaults.standard.set(true, forKey: "kIsLoggedIn")
-                        isLoggedIn = true
-                        
-                    }) {
-                        Text(goStr)
-                            .foregroundColor(.white)
-                            .fontWeight(.heavy)
-                            .padding()
-                            .background(Capsule(style: .continuous).fill(.green))
-                    }
-                    .navigationDestination(isPresented: $isLoggedIn) {
-                        MenuView()
-                    }
-                } else {
+                Button(action: {
+                    UserDefaults.standard.set(true, forKey: "kIsLoggedIn")
+                    isLoggedIn = true
+                    
+                }) {
                     Text(goStr)
-                        .foregroundColor(.clear)
+                        .foregroundColor(selectedTab == 2 ? .white : .clear)
                         .fontWeight(.heavy)
                         .padding()
-                        .background(Capsule(style: .continuous).fill(.clear))
+                        .background(
+                            Capsule(style: .continuous)
+                                .fill(selectedTab == 2 ? .green : .clear)
+                        )
+                }
+                .navigationDestination(isPresented: $isLoggedIn) {
+                    MenuView()
                 }
             }
             .background(
