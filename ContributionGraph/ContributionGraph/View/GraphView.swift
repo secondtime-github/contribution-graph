@@ -24,30 +24,10 @@ struct GraphView: View {
     var body: some View {
         NavigationView {
             VStack {
-                HStack {
-                    Button(action: {
-                        vm.currentDate = Calendar.current.date(byAdding: .month, value: -1, to: vm.currentDate)!
-                    }) {
-                        Image(systemName: "arrow.left").bold()
-                    }
-                    
-                    Text(dateFormatter.string(from: vm.currentDate))
-                        .fontWeight(.heavy)
-                        .font(.system(size: 28))
-                        .padding(.horizontal)
-                    
-                    Button(action: {
-                        vm.currentDate = Calendar.current.date(byAdding: .month, value: 1, to: vm.currentDate)!
-                    }) {
-                        Image(systemName: "arrow.right").bold()
-                    }
-                }
-                
+                dateBar
                 CalendarView(year: Calendar.current.component(.year, from: vm.currentDate),
                              month: Calendar.current.component(.month, from: vm.currentDate))
-                
                 Spacer()
-                
             }
             .navigationBarTitleDisplayMode(.large)// 必须设置为large才能保证sheet正常弹出
             .toolbar {
@@ -62,6 +42,27 @@ struct GraphView: View {
             }
             .onAppear {
                 vm.fetchCounts()
+            }
+        }
+    }
+    
+    var dateBar: some View {
+        HStack {
+            Button(action: {
+                vm.currentDate = Calendar.current.date(byAdding: .month, value: -1, to: vm.currentDate)!
+            }) {
+                Image(systemName: "arrow.left").bold()
+            }
+            
+            Text(dateFormatter.string(from: vm.currentDate))
+                .fontWeight(.heavy)
+                .font(.system(size: 28))
+                .padding(.horizontal)
+            
+            Button(action: {
+                vm.currentDate = Calendar.current.date(byAdding: .month, value: 1, to: vm.currentDate)!
+            }) {
+                Image(systemName: "arrow.right").bold()
             }
         }
     }

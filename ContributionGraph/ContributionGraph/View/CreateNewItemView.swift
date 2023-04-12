@@ -30,48 +30,10 @@ struct CreateNewItemView: View {
     var body: some View {
         NavigationView {
             Form {
-                Section(nameStr) {
-                    TextField("", text: $name)
-                        .onReceive(name.publisher.collect()) {
-                            self.name = String($0.prefix(20))
-                        }
-                }
-                
-                Section(iconStr) {
-                    LazyVGrid(columns: Array(repeating: GridItem(), count: 7)) {
-                        ForEach(emojis, id: \.self) { emoji in
-                            Button(action: {
-                                selectedIcon = emoji
-                            }) {
-                                Text(emoji)
-                                    .padding(5)
-                                    .background(selectedIcon == emoji
-                                                ? Color.accentColor
-                                                : .gray.opacity(0.5))
-                                    .cornerRadius(5)
-                            }
-                            .buttonStyle(.plain)
-                        }
-                    }
-                }
-                
-                Section(categoryStr) {
-                    Picker("", selection: $selectedCategory) {
-                        ForEach(Category.allCases, id: \.self) { category in
-                            Text(NSLocalizedString(category.rawValue, comment: ""))
-                        }
-                    }
-                    .pickerStyle(.wheel)
-                    .frame(maxHeight: 150)
-                }
-                
-                Section(descriptionStr) {
-                    TextEditor(text: $description)
-                        .frame(minHeight: 100)
-                        .onReceive(description.publisher.collect()) {
-                            self.description = String($0.prefix(100))
-                        }
-                }
+                nameSection
+                iconSection
+                categorySection
+                descriptionSection
             }
             .navigationTitle(selectedRoutineEntity?.name ?? newItemStr)
             .navigationBarTitleDisplayMode(.inline)
@@ -82,9 +44,7 @@ struct CreateNewItemView: View {
                     }
                 }
                 ToolbarItem(placement: .navigationBarLeading) {
-                    Button(action: {
-                        isShown.toggle()
-                    }) {
+                    Button(action: { isShown.toggle() }) {
                         Text(cancelStr)
                     }
                 }
@@ -99,7 +59,58 @@ struct CreateNewItemView: View {
                 description = selectedRoutine.description
             }
         }
-        .scrollDismissesKeyboard(.automatic)
+        .scrollDismissesKeyboard(.immediately)
+    }
+    
+    var nameSection: some View {
+        Section(nameStr) {
+            TextField("", text: $name)
+                .onReceive(name.publisher.collect()) {
+                    self.name = String($0.prefix(20))
+                }
+        }
+    }
+    
+    var iconSection: some View {
+        Section(iconStr) {
+            LazyVGrid(columns: Array(repeating: GridItem(), count: 7)) {
+                ForEach(emojis, id: \.self) { emoji in
+                    Button(action: {
+                        selectedIcon = emoji
+                    }) {
+                        Text(emoji)
+                            .padding(5)
+                            .background(selectedIcon == emoji
+                                        ? Color.accentColor
+                                        : .gray.opacity(0.5))
+                            .cornerRadius(5)
+                    }
+                    .buttonStyle(.plain)
+                }
+            }
+        }
+    }
+    
+    var categorySection: some View {
+        Section(categoryStr) {
+            Picker("", selection: $selectedCategory) {
+                ForEach(Category.allCases, id: \.self) { category in
+                    Text(NSLocalizedString(category.rawValue, comment: ""))
+                }
+            }
+            .pickerStyle(.wheel)
+            .frame(maxHeight: 150)
+        }
+    }
+    
+    var descriptionSection: some View {
+        Section(descriptionStr) {
+            TextEditor(text: $description)
+                .frame(minHeight: 100)
+                .onReceive(description.publisher.collect()) {
+                    self.description = String($0.prefix(100))
+                }
+        }
     }
     
     func updateRoutine() {

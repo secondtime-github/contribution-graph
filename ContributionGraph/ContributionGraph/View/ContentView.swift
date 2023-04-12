@@ -42,64 +42,79 @@ struct ContentView: View {
     
     var body: some View {
         VStack {
-            HStack {
-                Button(action: {
-                    vm.currentDate = Calendar.current.date(byAdding: .day, value: -1, to: vm.currentDate)!
-                }) {
-                    Image(systemName: "arrow.left").bold()
-                }
-                
-                Text(formattedCurrentDate)
-                    .fontWeight(.heavy)
-                    .font(.system(size: 28))
-                    .padding(.horizontal)
-                
-                Button(action: {
-                    vm.currentDate = Calendar.current.date(byAdding: .day, value: 1, to: vm.currentDate)!
-                }) {
-                    Image(systemName: "arrow.right").bold()
-                }
-            }
-            
-            // Hero
+            dateBar
             Hero()
-            
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack {
-                    CategoryButton(
-                        currentCategory: $currentCategory,
-                        category: nil
-                    )
-                    ForEach(Category.allCases) { category in
-                        CategoryButton(
-                            currentCategory: $currentCategory,
-                            category: category
-                        )
-                    }
-                }
-            }
-            .padding()
-            
-            List {
-                ForEach(filteredRoutines, id: \.self) { routine in
-                    HStack {
-                        Text(routine.icon)
-                        Text(routine.name)
-                        Spacer()
-                        
-                        Button(action: {
-                            vm.toggleTask(with: routine)
-                        }) {
-                            Image(systemName: vm.tasks[routine] ?? false
-                                  ? "checkmark.circle.fill"
-                                  : "circle")
-                        }
-                    }
-                }
-            }
+            categoryFilter
+            checkSheet
         }
         .onAppear {
             vm.fetchTasks()
+        }
+    }
+    
+    var dateBar: some View {
+        HStack {
+            Button(action: {
+                vm.currentDate = Calendar.current.date(byAdding: .day, value: -1, to: vm.currentDate)!
+            }) {
+                Image(systemName: "arrow.left").bold()
+            }
+            
+            Text(formattedCurrentDate)
+                .fontWeight(.heavy)
+                .font(.system(size: 28))
+                .padding(.horizontal)
+            
+            Button(action: {
+                vm.currentDate = Calendar.current.date(byAdding: .day, value: 1, to: vm.currentDate)!
+            }) {
+                Image(systemName: "arrow.right").bold()
+            }
+        }
+    }
+    
+    var categoryFilter: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack {
+                CategoryButton(
+                    currentCategory: $currentCategory,
+                    category: nil
+                )
+                ForEach(Category.allCases) { category in
+                    CategoryButton(
+                        currentCategory: $currentCategory,
+                        category: category
+                    )
+                }
+            }
+            .background(
+                HStack {
+                    Circle().fill(.green)
+                        .offset(x: 63 * CGFloat(currentCategory?.index ?? 0))
+                    Spacer()
+                }
+            )
+        }
+        .padding()
+    }
+    
+    var checkSheet: some View {
+        List {
+            ForEach(filteredRoutines, id: \.self) { routine in
+                HStack {
+                    Text(routine.icon)
+                    Text(routine.name)
+                    Spacer()
+                    
+                    Button(action: {
+                        vm.toggleTask(with: routine)
+                    }) {
+                        Image(systemName: vm.tasks[routine] ?? false
+                              ? "checkmark.circle.fill"
+                              : "circle")
+                    }
+                }
+            }
         }
     }
 }
@@ -121,13 +136,15 @@ struct CategoryButton: View {
     
     var body: some View {
         Button(action: {
-            currentCategory = category
+            withAnimation(.spring(response: 0.3, dampingFraction: 0.5)) {
+                currentCategory = category
+            }
         }) {
             Text(category?.icon ?? "😊")
                 .padding()
-                .background(Circle().fill(.green.opacity(
-                    currentCategory == category ? 1 : 0.5)
-                ))
+                .background(
+                    Circle().fill(.green.opacity(0.5))
+                )
         }
     }
 }

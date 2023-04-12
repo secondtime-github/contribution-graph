@@ -30,4 +30,15 @@ enum Category: String, CaseIterable, Identifiable {
         }
     }
     
+    var index: Int {
+        switch self {
+        case .study: return 1
+        case .work: return 2
+        case .finance: return 3
+        case .health: return 4
+        case .relationships: return 5
+        case .entertainment: return 6
+        case .hobbies: return 7
+        }
+    }
 }
