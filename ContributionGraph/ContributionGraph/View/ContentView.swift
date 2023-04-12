@@ -87,6 +87,13 @@ struct ContentView: View {
                     )
                 }
             }
+            .background(
+                HStack {
+                    Circle().fill(.green)
+                        .offset(x: 63 * CGFloat(currentCategory?.index ?? 0))
+                    Spacer()
+                }
+            )
         }
         .padding()
     }
@@ -129,13 +136,15 @@ struct CategoryButton: View {
     
     var body: some View {
         Button(action: {
-            currentCategory = category
+            withAnimation(.spring(response: 0.3, dampingFraction: 0.5)) {
+                currentCategory = category
+            }
         }) {
             Text(category?.icon ?? "😊")
                 .padding()
-                .background(Circle().fill(.green.opacity(
-                    currentCategory == category ? 1 : 0.5)
-                ))
+                .background(
+                    Circle().fill(.green.opacity(0.5))
+                )
         }
     }
 }
